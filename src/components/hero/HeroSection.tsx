@@ -7,6 +7,8 @@ export default function HeroSection() {
         loop
         muted
         playsInline
+        preload="auto"
+        poster="/assets/hero-poster.png"
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
         <source src="https://videos.pexels.com/video-files/29726641/12780046_3840_2160_30fps.mp4" type="video/mp4" />

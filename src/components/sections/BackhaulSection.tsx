@@ -114,6 +114,8 @@ export default function BackhaulSection() {
             src="/assets/backhaul-video.mp4"
             muted={isMuted}
             playsInline
+            preload="auto"
+            poster="/assets/backhaul.png"
             className="w-full h-auto object-cover cursor-pointer"
             onClick={togglePlay}
           />
