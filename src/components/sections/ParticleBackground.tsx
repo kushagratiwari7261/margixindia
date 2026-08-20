@@ -75,8 +75,8 @@ export default function ParticleBackground() {
         if (!ctx) return;
         
         // Seamless scroll resistance wrapping
-        let visualY = (this.y + parallaxOffset) % canvas.height;
-        if (visualY < 0) visualY += canvas.height;
+        let visualY = (this.y + parallaxOffset) % canvas!.height;
+        if (visualY < 0) visualY += canvas!.height;
 
         ctx.beginPath();
         ctx.arc(this.x, visualY, this.size, 0, Math.PI * 2);
@@ -88,10 +88,10 @@ export default function ParticleBackground() {
 
       update(deltaTime: number, parallaxOffset: number) {
         // Wall collision
-        if (this.x > canvas.width || this.x < 0) {
+        if (this.x > canvas!.width || this.x < 0) {
           this.directionX = -this.directionX;
         }
-        if (this.y > canvas.height || this.y < 0) {
+        if (this.y > canvas!.height || this.y < 0) {
           this.directionY = -this.directionY;
         }
 
@@ -99,8 +99,8 @@ export default function ParticleBackground() {
         if (mouse.x != null && mouse.y != null) {
           // Adjust mouse Y to match the visually wrapped position of the particle
           // so interaction feels correct even when scrolled
-          let visualY = (this.y + parallaxOffset) % canvas.height;
-          if (visualY < 0) visualY += canvas.height;
+          let visualY = (this.y + parallaxOffset) % canvas!.height;
+          if (visualY < 0) visualY += canvas!.height;
 
           let dx = mouse.x - this.x;
           let dy = mouse.y - visualY;
@@ -131,11 +131,11 @@ export default function ParticleBackground() {
 
     function init() {
       particlesArray = [];
-      const numberOfParticles = Math.min((canvas.width * canvas.height) / 8000, 150);
+      const numberOfParticles = Math.min((canvas!.width * canvas!.height) / 8000, 150);
       for (let i = 0; i < numberOfParticles; i++) {
         const size = Math.random() * 1.5 + 1;
-        const x = Math.random() * (canvas.width - size * 2) + size;
-        const y = Math.random() * (canvas.height - size * 2) + size;
+        const x = Math.random() * (canvas!.width - size * 2) + size;
+        const y = Math.random() * (canvas!.height - size * 2) + size;
         const directionX = (Math.random() - 0.5) * 2;
         const directionY = (Math.random() - 0.5) * 2;
         particlesArray.push(new Particle(x, y, directionX, directionY, size));
@@ -153,7 +153,7 @@ export default function ParticleBackground() {
       // Calculate scroll parallax (0.4 speed factor)
       const parallaxOffset = scrollY * 0.4;
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas!.width, canvas!.height);
       for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update(deltaTime, parallaxOffset);
       }
