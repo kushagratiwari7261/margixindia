@@ -96,10 +96,10 @@ export default function BackhaulSection() {
             <ArrowRightLeft size={14} className="text-amber-600" />
             The Backhaul Advantage
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-neutral-900 tracking-tight mb-6">
+          <h2 className="text-3xl md:text-5xl font-black text-neutral-900 tracking-tight mb-4 lg:mb-6">
             Never Drive Empty Again
           </h2>
-          <p className="text-lg text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base lg:text-lg text-neutral-600 leading-relaxed max-w-2xl mx-auto">
             Margix AI eliminates deadhead by automatically securing return shipments
             at your destination — turning every return trip into revenue.
           </p>
@@ -108,7 +108,7 @@ export default function BackhaulSection() {
 
       {/* Video Canvas */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative w-full rounded-3xl border-4 border-white shadow-2xl overflow-hidden bg-neutral-900 group">
+        <div className="relative w-full rounded-xl md:rounded-3xl border-2 md:border-4 border-white shadow-xl md:shadow-2xl overflow-hidden bg-neutral-900 group">
           <video 
             ref={videoRef}
             src="/assets/backhaul-video.mp4"
@@ -123,11 +123,11 @@ export default function BackhaulSection() {
           {/* Big Center Play/Pause or Replay indicator */}
           {(!isPlaying || isEnded) && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/20 z-20 cursor-pointer" onClick={togglePlay}>
-              <div className="p-6 bg-black/50 backdrop-blur-md rounded-full text-white shadow-2xl transition-transform transform hover:scale-110">
+              <div className="p-4 md:p-6 bg-black/50 backdrop-blur-md rounded-full text-white shadow-2xl transition-transform transform hover:scale-110">
                 {isEnded ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><polygon points="10 8 16 12 10 16" fill="currentColor"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 md:w-12 md:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><polygon points="10 8 16 12 10 16" fill="currentColor"/></svg>
                 ) : (
-                  <Play size={48} fill="currentColor" className="ml-2" />
+                  <Play className="w-8 h-8 md:w-12 md:h-12 ml-1 md:ml-2" fill="currentColor" />
                 )}
               </div>
               {isEnded && <p className="absolute bottom-[30%] text-white/80 text-sm font-bold">Click to Replay</p>}
@@ -135,7 +135,7 @@ export default function BackhaulSection() {
           )}
 
           {/* Bottom Controls Bar */}
-          <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent pt-10 pb-4 px-3 sm:px-5 transition-opacity duration-300 z-30 ${!isPlaying ? 'opacity-100' : 'opacity-100 lg:opacity-0 lg:group-hover:opacity-100'}`}>
+          <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent pt-8 pb-3 px-3 sm:pt-10 sm:pb-4 sm:px-5 transition-opacity duration-300 z-30 ${!isPlaying ? 'opacity-100' : 'opacity-100 lg:opacity-0 lg:group-hover:opacity-100'}`}>
             {/* Custom Progress Bar with Large Hit Area */}
             <div 
               className="w-full h-6 flex items-center cursor-pointer mb-1 group/bar"

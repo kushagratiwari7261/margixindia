@@ -87,10 +87,10 @@ export default function WorkflowSection() {
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center py-12 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full max-h-full flex flex-col">
           <div className="text-center mb-8 lg:mb-12 shrink-0">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 lg:mb-6">
-              <span className="bg-margix-yellow text-margix-black px-4 py-1 inline-block">From Shipment to Smarter Logistics</span>
+            <h2 className="text-2xl md:text-5xl font-bold mb-3 lg:mb-6">
+              <span className="bg-margix-yellow text-margix-black px-3 py-1 lg:px-4 lg:py-1 inline-block">From Shipment to Smarter Logistics</span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-base lg:text-lg">Our intelligent workflow seamlessly transforms raw data into highly optimized, cost-efficient logistics operations.</p>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm lg:text-lg">Our intelligent workflow seamlessly transforms raw data into highly optimized, cost-efficient logistics operations.</p>
           </div>
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start flex-1 min-h-0 pt-4">
@@ -98,7 +98,7 @@ export default function WorkflowSection() {
             {/* Left: Dynamic Dashboard Image */}
             <div className="w-full lg:w-1/2 relative flex-1 min-h-0 flex items-start">
               <motion.div
-                className="relative w-full h-[30vh] lg:h-[60vh] flex items-center justify-center [perspective:1200px]"
+                className="relative w-full h-[25vh] md:h-[40vh] lg:h-[60vh] flex items-center justify-center [perspective:1200px]"
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -142,7 +142,7 @@ export default function WorkflowSection() {
               <div className="absolute top-0 right-0 z-50 flex justify-end pointer-events-none">
                 <button
                   onClick={handleSkip}
-                  className="pointer-events-auto bg-margix-yellow text-margix-black px-6 py-3 rounded-full font-bold shadow-lg shadow-yellow-500/20 hover:scale-105 transition-transform flex items-center gap-2 group"
+                  className="pointer-events-auto bg-margix-yellow text-margix-black px-4 py-2 text-sm lg:text-base lg:px-6 lg:py-3 rounded-full font-bold shadow-lg shadow-yellow-500/20 hover:scale-105 transition-transform flex items-center gap-2 group"
                 >
                   Skip Workflow
                   <svg className="w-4 h-4 group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -170,10 +170,10 @@ export default function WorkflowSection() {
 
                       <div className="flex flex-col gap-1">
                         <div className="flex items-center gap-3 md:gap-4">
-                          <span className={`text-2xl md:text-3xl font-black transition-colors duration-300 ${isActive ? 'text-margix-yellow' : 'text-gray-200'}`}>
+                          <span className={`text-xl md:text-3xl font-black transition-colors duration-300 ${isActive ? 'text-margix-yellow' : 'text-gray-200'}`}>
                             {stage.num}
                           </span>
-                          <h3 className={`text-xl md:text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-margix-black' : 'text-gray-500'}`}>
+                          <h3 className={`text-lg md:text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-margix-black' : 'text-gray-500'}`}>
                             {stage.title}
                           </h3>
                         </div>
@@ -187,7 +187,7 @@ export default function WorkflowSection() {
                               transition={{ duration: 0.3 }}
                               className="overflow-hidden"
                             >
-                              <p className="text-gray-600 text-sm md:text-base leading-relaxed pt-2 md:pt-3 pb-2 ml-0 md:ml-[52px]">
+                              <p className="text-gray-600 text-xs md:text-base leading-relaxed pt-1 md:pt-3 pb-2 ml-0 md:ml-[52px]">
                                 {stage.desc}
                               </p>
                             </motion.div>

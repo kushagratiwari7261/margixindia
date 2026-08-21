@@ -41,10 +41,10 @@ export default function HeroSection() {
               <path d="M70 50 L95 85 L75 85 L60 62 Z" fill="#222" />
             </svg>
             <div className="flex items-baseline leading-none mb-2">
-              <span className="text-4xl md:text-6xl font-bold text-white tracking-tight">Margix</span>
-              <span className="text-4xl md:text-6xl font-bold text-margix-yellow tracking-tight">India</span>
+              <span className="text-3xl md:text-6xl font-bold text-white tracking-tight">Margix</span>
+              <span className="text-3xl md:text-6xl font-bold text-margix-yellow tracking-tight">India</span>
             </div>
-            <div className="flex items-center justify-between text-xs md:text-sm tracking-[0.3em] text-gray-300 font-bold w-full">
+            <div className="flex items-center justify-between text-[10px] md:text-sm tracking-[0.3em] text-gray-300 font-bold w-full">
               <span>MOVE</span>
               <span className="text-margix-yellow scale-150 leading-none">•</span>
               <span>CONNECT</span>
@@ -54,19 +54,19 @@ export default function HeroSection() {
         </div>
 
         {/* Quotation similar to BlackBuck */}
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight mb-6">
+        <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight mb-4 lg:mb-6">
           India’s Intelligent <span className="text-margix-yellow">Transportation Platform</span>
         </h1>
 
-        <p className="text-lg md:text-2xl text-gray-300 mb-10 max-w-4xl">
+        <p className="text-sm md:text-2xl text-gray-300 mb-8 lg:mb-10 max-w-4xl">
           One platform to manage fleets, shipments, transporters, and logistics operations. Optimize costs, reduce empty miles, gain real-time visibility, and access verified transportation capacity
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto px-4 sm:px-0">
-          <a href="#platform" className="w-full sm:w-auto text-center px-8 py-4 bg-margix-yellow text-margix-black rounded-lg font-bold text-lg hover:bg-yellow-400 transition-colors shadow-lg shadow-yellow-500/20 cursor-pointer">
+          <a href="#platform" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 bg-margix-yellow text-margix-black rounded-lg font-bold text-base md:text-lg hover:bg-yellow-400 transition-colors shadow-lg shadow-yellow-500/20 cursor-pointer">
             Optimize a Shipment
           </a>
-          <a href="#how-it-works" className="w-full sm:w-auto text-center px-8 py-4 bg-white/10 text-white border border-white/20 rounded-lg font-bold text-lg hover:bg-white/20 transition-colors backdrop-blur-sm cursor-pointer">
+          <a href="#how-it-works" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 bg-white/10 text-white border border-white/20 rounded-lg font-bold text-base md:text-lg hover:bg-white/20 transition-colors backdrop-blur-sm cursor-pointer">
             See How It Works
           </a>
         </div>
