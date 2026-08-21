@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/logo.png';
-import ContactModal from '../modals/ContactModal';
 
-export default function Navbar() {
-  const [isContactOpen, setIsContactOpen] = useState(false);
+interface NavbarProps {
+  onOpenContact: () => void;
+}
+
+export default function Navbar({ onOpenContact }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const smoothScrollTo = (targetY: number, duration = 1200) => {
@@ -65,7 +67,7 @@ export default function Navbar() {
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center">
               <button
-                onClick={() => setIsContactOpen(true)}
+                onClick={onOpenContact}
                 className="bg-gradient-to-r from-margix-yellow to-yellow-400 text-margix-black px-6 py-2.5 rounded-md font-bold text-sm hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300 transform hover:-translate-y-0.5"
               >
                 Get Started
@@ -105,7 +107,7 @@ export default function Navbar() {
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  setIsContactOpen(true);
+                  onOpenContact();
                 }}
                 className="bg-margix-yellow text-margix-black px-8 py-4 rounded-xl font-black text-lg shadow-xl shadow-yellow-500/20 mt-4"
               >
@@ -115,8 +117,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </>
   );
 }

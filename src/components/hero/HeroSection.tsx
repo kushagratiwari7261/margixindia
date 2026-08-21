@@ -1,4 +1,8 @@
-export default function HeroSection() {
+interface HeroSectionProps {
+  onOpenContact?: () => void;
+}
+
+export default function HeroSection({ onOpenContact }: HeroSectionProps) {
   return (
     <section id="platform" className="relative min-h-screen w-full overflow-hidden flex items-center justify-center text-center pt-24 pb-12">
       {/* Background Video */}
@@ -63,9 +67,12 @@ export default function HeroSection() {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto px-4 sm:px-0">
-          <a href="#platform" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 bg-margix-yellow text-margix-black rounded-lg font-bold text-base md:text-lg hover:bg-yellow-400 transition-colors shadow-lg shadow-yellow-500/20 cursor-pointer">
+          <button 
+            onClick={onOpenContact}
+            className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 bg-margix-yellow text-margix-black rounded-lg font-bold text-base md:text-lg hover:bg-yellow-400 transition-colors shadow-lg shadow-yellow-500/20 cursor-pointer"
+          >
             Optimize a Shipment
-          </a>
+          </button>
           <a href="#how-it-works" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 bg-white/10 text-white border border-white/20 rounded-lg font-bold text-base md:text-lg hover:bg-white/20 transition-colors backdrop-blur-sm cursor-pointer">
             See How It Works
           </a>

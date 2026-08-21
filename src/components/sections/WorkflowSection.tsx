@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 
 const stages = [
@@ -50,8 +50,17 @@ export default function WorkflowSection() {
     offset: ["start start", "end end"]
   });
 
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (isSkippingRef.current) return;
+    if (isSkippingRef.current || !isDesktop) return;
     let index = Math.floor(latest * stages.length);
     if (index >= stages.length) index = stages.length - 1;
     setActiveStage(index);
@@ -83,8 +92,8 @@ export default function WorkflowSection() {
   };
 
   return (
-    <section ref={sectionRef} id="how-it-works" className="h-[400vh] bg-margix-light relative">
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center py-12 lg:py-24">
+    <section ref={sectionRef} id="how-it-works" className="h-auto lg:h-[400vh] bg-margix-light relative">
+      <div className="lg:sticky lg:top-0 h-auto lg:h-screen lg:overflow-hidden flex flex-col justify-center py-12 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full max-h-full flex flex-col">
           <div className="text-center mb-8 lg:mb-12 shrink-0">
             <h2 className="text-2xl md:text-5xl font-bold mb-3 lg:mb-6">
@@ -95,8 +104,8 @@ export default function WorkflowSection() {
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start flex-1 min-h-0 pt-4">
 
-            {/* Left: Dynamic Dashboard Image */}
-            <div className="w-full lg:w-1/2 relative flex-1 min-h-0 flex items-start">
+            {/* Left: Dynamic Dashboard Image (Desktop Only) */}
+            <div className="hidden lg:flex w-full lg:w-1/2 relative flex-1 min-h-0 items-start">
               <motion.div
                 className="relative w-full h-[25vh] md:h-[40vh] lg:h-[60vh] flex items-center justify-center [perspective:1200px]"
                 initial={{ opacity: 0, x: -50 }}
@@ -134,12 +143,12 @@ export default function WorkflowSection() {
             </div>
 
             {/* Right: Interactive Stages List */}
-            <div className="w-full lg:w-1/2 flex flex-col relative h-[50vh] lg:h-auto overflow-y-auto lg:overflow-visible pr-2 custom-scrollbar">
+            <div className="w-full lg:w-1/2 flex flex-col relative h-auto lg:h-auto overflow-visible pr-0 lg:pr-2 custom-scrollbar">
               {/* Continuous Vertical Line */}
               <div className="absolute left-[11px] top-4 bottom-4 w-[2px] bg-gray-200 hidden md:block"></div>
 
               {/* Skip Button */}
-              <div className="absolute top-0 right-0 z-50 flex justify-end pointer-events-none">
+              <div className="hidden lg:flex absolute top-0 right-0 z-50 justify-end pointer-events-none">
                 <button
                   onClick={handleSkip}
                   className="pointer-events-auto bg-margix-yellow text-margix-black px-4 py-2 text-sm lg:text-base lg:px-6 lg:py-3 rounded-full font-bold shadow-lg shadow-yellow-500/20 hover:scale-105 transition-transform flex items-center gap-2 group"
@@ -151,18 +160,22 @@ export default function WorkflowSection() {
                 </button>
               </div>
 
-              <div className="mt-12 lg:mt-0 pb-12 lg:pb-24">
+              <div className="mt-8 lg:mt-0 pb-12 lg:pb-24">
                 {stages.map((stage, idx) => {
-                  const isActive = activeStage === idx;
+                  const isActive = !isDesktop || activeStage === idx;
 
                   return (
                     <motion.div
                       key={idx}
-                      className="relative pl-0 md:pl-16 py-2 lg:py-4 flex flex-col transition-all duration-500"
-                      animate={{
+                      className="relative pl-0 md:pl-16 py-6 lg:py-4 flex flex-col transition-all duration-500"
+                      initial={!isDesktop ? { opacity: 0, y: 40 } : undefined}
+                      whileInView={!isDesktop ? { opacity: 1, y: 0 } : undefined}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      animate={isDesktop ? {
                         opacity: isActive ? 1 : 0.3,
                         scale: isActive ? 1.02 : 1
-                      }}
+                      } : undefined}
                     >
                       {/* Timeline dot */}
                       <div className={`hidden md:flex absolute left-[0px] top-[20px] lg:top-[24px] w-6 h-6 rounded-full border-4 border-margix-light items-center justify-center transition-all duration-300 z-10 ${isActive ? 'bg-margix-yellow scale-110 shadow-[0_0_0_4px_rgba(249,249,249,1)]' : 'bg-gray-200'}`}>
@@ -181,15 +194,28 @@ export default function WorkflowSection() {
                         <AnimatePresence>
                           {isActive && (
                             <motion.div
-                              initial={{ opacity: 0, height: 0 }}
+                              initial={isDesktop ? { opacity: 0, height: 0 } : false}
                               animate={{ opacity: 1, height: 'auto' }}
-                              exit={{ opacity: 0, height: 0 }}
+                              exit={isDesktop ? { opacity: 0, height: 0 } : undefined}
                               transition={{ duration: 0.3 }}
                               className="overflow-hidden"
                             >
-                              <p className="text-gray-600 text-xs md:text-base leading-relaxed pt-1 md:pt-3 pb-2 ml-0 md:ml-[52px]">
+                              <p className="text-gray-600 text-sm md:text-base leading-relaxed pt-1 md:pt-3 pb-2 ml-0 md:ml-[52px]">
                                 {stage.desc}
                               </p>
+                              
+                              {/* Mobile Image */}
+                              {!isDesktop && (
+                                <motion.div 
+                                  initial={{ opacity: 0, scale: 0.95 }}
+                                  whileInView={{ opacity: 1, scale: 1 }}
+                                  viewport={{ once: true }}
+                                  transition={{ duration: 0.5, delay: 0.2 }}
+                                  className="mt-4 mb-2 w-full h-[25vh] sm:h-[35vh] rounded-xl overflow-hidden relative shadow-md bg-white"
+                                >
+                                  <img src={stage.image} alt={stage.title} className="w-full h-full object-contain mix-blend-multiply" />
+                                </motion.div>
+                              )}
                             </motion.div>
                           )}
                         </AnimatePresence>

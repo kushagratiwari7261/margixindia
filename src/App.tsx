@@ -8,11 +8,13 @@ import FeaturesSection from './components/sections/FeaturesSection';
 import AudienceSection from './components/sections/AudienceSection';
 import BackhaulSection from './components/sections/BackhaulSection';
 import Footer from './components/layout/Footer';
+import ContactModal from './components/modals/ContactModal';
 import { ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 function App() {
   const [isAtBottom, setIsAtBottom] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,9 +49,9 @@ function App() {
 
   return (
     <div className="min-h-screen bg-margix-black text-white font-sans selection:bg-margix-yellow selection:text-black relative">
-      <Navbar />
+      <Navbar onOpenContact={() => setIsContactOpen(true)} />
       <main>
-        <HeroSection />
+        <HeroSection onOpenContact={() => setIsContactOpen(true)} />
         <MetricsSection />
         <WorkflowSection />
         <FeaturesSection />
@@ -72,6 +74,8 @@ function App() {
           </motion.button>
         )}
       </AnimatePresence>
+
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </div>
   );
 }

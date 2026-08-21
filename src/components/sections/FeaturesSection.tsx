@@ -6,7 +6,7 @@ const BentoCard = ({ children, className = "", delay = 0 }: { children: React.Re
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-100px" }}
+    viewport={{ once: true, margin: "0px" }}
     transition={{ duration: 0.6, delay, type: "spring", bounce: 0.4 }}
     whileHover={{ y: -5, transition: { duration: 0.2 } }}
     className={`relative bg-white rounded-3xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-margix-yellow/10 hover:border-margix-yellow/50 transition-all duration-300 ${className}`}
@@ -81,7 +81,7 @@ export default function FeaturesSection() {
 
           {/* Card 2: Route Intelligence (1 column wide) */}
           <BentoCard className="md:col-span-1" delay={0.2}>
-            <div className="flex flex-col h-full p-8 relative">
+            <div className="flex flex-col h-full p-6 md:p-8 pb-48 md:pb-48 relative">
               <h3 className="text-2xl font-black mb-3 relative z-10">Route Intelligence</h3>
               <p className="text-neutral-500 font-medium text-sm relative z-10 mb-8">
                 Dynamic dispatch balancing distance, tolls, and time constraints.
@@ -96,9 +96,9 @@ export default function FeaturesSection() {
           </BentoCard>
 
           {/* Card 3: Backhaul Optimization (3 columns wide) */}
-          <BentoCard className="md:col-span-3 h-[250px] md:h-auto" delay={0.3}>
-            <div className="flex flex-col md:flex-row h-full items-center p-8 md:p-10 relative overflow-hidden">
-              <div className="md:w-1/2 relative z-10 bg-white/80 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none p-4 md:p-0 rounded-xl">
+          <BentoCard className="md:col-span-3 min-h-[350px] md:min-h-0 md:h-auto" delay={0.3}>
+            <div className="flex flex-col md:flex-row h-full items-start md:items-center p-6 md:p-10 relative overflow-hidden">
+              <div className="md:w-1/2 relative z-20 bg-white/95 md:bg-transparent backdrop-blur-md md:backdrop-blur-none p-5 md:p-0 rounded-2xl md:rounded-none shadow-xl md:shadow-none mb-32 md:mb-0">
                 <h3 className="text-3xl font-black mb-3">Backhaul Optimization</h3>
                 <p className="text-neutral-500 font-medium leading-relaxed max-w-md">
                   Eliminate empty miles. Our AI matches available capacity with return loads instantly, turning deadhead into profit.
@@ -106,9 +106,9 @@ export default function FeaturesSection() {
               </div>
 
               {/* Realistic Image: Backhaul */}
-              <div className="absolute inset-0 md:left-1/2 w-full md:w-1/2 h-full pointer-events-none overflow-hidden">
+              <div className="absolute bottom-0 left-0 md:top-0 md:left-1/2 w-full md:w-1/2 h-48 md:h-full pointer-events-none overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent z-10 hidden md:block" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent z-10 md:hidden" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10 md:hidden" />
                 <img src="/images/feature_backhaul.jpg" alt="Backhaul Optimization" className="w-full h-full object-cover object-right" />
               </div>
             </div>

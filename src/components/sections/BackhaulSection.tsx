@@ -1,6 +1,6 @@
-
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { ArrowRightLeft, Volume2, VolumeX, Play, Pause } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function BackhaulSection() {
   const [isMuted, setIsMuted] = useState(false);
@@ -107,7 +107,13 @@ export default function BackhaulSection() {
       </div>
 
       {/* Video Canvas */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <div className="relative w-full rounded-xl md:rounded-3xl border-2 md:border-4 border-white shadow-xl md:shadow-2xl overflow-hidden bg-neutral-900 group">
           <video 
             ref={videoRef}
@@ -116,9 +122,11 @@ export default function BackhaulSection() {
             playsInline
             preload="auto"
             poster="/assets/backhaul.png"
-            className="w-full h-auto object-cover cursor-pointer"
-            onClick={togglePlay}
+            className="w-full h-auto object-cover"
           />
+          
+          {/* Invisible overlay to reliably handle clicks on mobile */}
+          <div className="absolute inset-0 z-10 cursor-pointer" onClick={togglePlay} />
 
           {/* Big Center Play/Pause or Replay indicator */}
           {(!isPlaying || isEnded) && (
@@ -200,7 +208,7 @@ export default function BackhaulSection() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

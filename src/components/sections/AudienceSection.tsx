@@ -86,21 +86,22 @@ export default function AudienceSection() {
               {/* Collapsible Content */}
               <div className="flex-1 overflow-hidden relative">
                 <AnimatePresence>
-                  {(hovered === 'vendor' || hovered === 'none') && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
-                      transition={{ duration: 0.4 }}
-                      className="absolute inset-0 pt-4"
-                    >
+                  {(!isDesktop || hovered === 'vendor' || hovered === 'none') && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
+                        transition={{ duration: 0.4 }}
+                        className="pt-4 lg:absolute lg:inset-0"
+                      >
                       <div className="space-y-6">
                         {vendorsList.map((item, idx) => (
                           <motion.div 
                             key={idx} 
                             initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.1 + (idx * 0.1) }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-20px" }}
+                            transition={{ delay: 0.1 + (idx * 0.1), duration: 0.4 }}
                             className="flex items-start gap-4"
                           >
                             <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center">
@@ -165,21 +166,22 @@ export default function AudienceSection() {
               {/* Collapsible Content */}
               <div className="flex-1 overflow-hidden relative">
                 <AnimatePresence>
-                  {(hovered === 'fleet' || hovered === 'none') && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
-                      transition={{ duration: 0.4 }}
-                      className="absolute inset-0 pt-4"
-                    >
+                  {(!isDesktop || hovered === 'fleet' || hovered === 'none') && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
+                        transition={{ duration: 0.4 }}
+                        className="pt-4 lg:absolute lg:inset-0"
+                      >
                       <div className="space-y-6">
                         {fleetList.map((item, idx) => (
                           <motion.div 
                             key={idx}
                             initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.1 + (idx * 0.1) }} 
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-20px" }}
+                            transition={{ delay: 0.1 + (idx * 0.1), duration: 0.4 }} 
                             className="flex items-start gap-4"
                           >
                             <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-margix-yellow/20 flex items-center justify-center">
