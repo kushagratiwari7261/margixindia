@@ -1,16 +1,30 @@
+import { useEffect, useRef } from 'react';
+
 interface HeroSectionProps {
   onOpenContact?: () => void;
 }
 
 export default function HeroSection({ onOpenContact }: HeroSectionProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Auto-play was prevented by browser:", error);
+      });
+    }
+  }, []);
+
   return (
     <section id="platform" className="relative min-h-screen w-full overflow-hidden flex items-center justify-center text-center pt-24 pb-12">
       {/* Background Video */}
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
+        disablePictureInPicture
         preload="auto"
         poster="/assets/hero-poster.png"
         className="absolute inset-0 w-full h-full object-cover z-0"
