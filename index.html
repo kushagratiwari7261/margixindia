@@ -8,19 +8,84 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Margix India is a leading logistics SaaS platform. Optimize fleet management, match backhaul capacity, and reduce empty miles with our intelligent transportation solutions." />
+    
+    <!-- OpenGraph / Social Meta Tags -->
+    <meta property="og:title" content="Margix India | Intelligent Logistics SaaS Platform" />
+    <meta property="og:description" content="Optimize fleet management, reduce empty miles, and track shipments in real-time with India's leading transportation platform." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.margixindia.com/" />
+    <meta property="og:image" content="https://www.margixindia.com/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Margix India | Logistics SaaS" />
+    <meta name="twitter:description" content="India’s Intelligent Transportation Platform." />
+    
     <title>Margix India | Logistics SaaS</title>
-    <!-- Structured Data for Google Search Logo -->
+    <!-- Structured Data for Google Search Logo & Organization -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "name": "Margix India",
       "url": "https://www.margixindia.com/",
-      "logo": "https://www.margixindia.com/logo.png"
+      "logo": "https://www.margixindia.com/logo.png",
+      "description": "Margix India is an intelligent logistics SaaS platform providing fleet management, route optimization, and backhaul matching to reduce empty miles.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "contact@margixindia.com"
+      }
+    }
+    </script>
+
+    <!-- FAQ Structured Data for AI Overviews -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does Margix India reduce empty miles?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Margix AI eliminates deadhead by automatically securing return shipments (backhauling) at your destination, matching available capacity with return loads instantly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Margix's logistics platform used for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Margix is a unified platform to manage fleets, shipments, transporters, and logistics operations. It optimizes costs, provides real-time tracking, and matches verified transportation capacity."
+          }
+        }
+      ]
     }
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Fallback HTML for Search Engine Crawlers (will be overwritten by React immediately on load) -->
+      <div style="display: none;">
+        <h1>Margix India | Intelligent Logistics SaaS Platform</h1>
+        <p>One platform to manage fleets, shipments, transporters, and logistics operations. Optimize costs, reduce empty miles, gain real-time visibility, and access verified transportation capacity.</p>
+        
+        <h2>Core Services</h2>
+        <ul>
+          <li><strong>Load Optimization:</strong> Maximize trailer space on every trip, significantly increasing the volume of freight transported per truck.</li>
+          <li><strong>Backhaul Optimization:</strong> Eliminate empty miles. Our AI matches available capacity with return loads instantly, turning deadhead into profit.</li>
+          <li><strong>Route Intelligence:</strong> Dynamic dispatch balancing distance, tolls, and time constraints.</li>
+        </ul>
+
+        <h2>Who is Margix for?</h2>
+        <h3>For Vendors</h3>
+        <p>End-to-end visibility and automation for shippers and manufacturers. Access verified capacity instantly, track shipments in real-time, and streamline compliance and billing processes effortlessly.</p>
+        
+        <h3>For Fleet Owners</h3>
+        <p>Command center for modern transporters. Eliminate empty miles with predictive backhaul matching, manage driver operations, and optimize routes for maximum profitability.</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
       // Cleanup ghost service workers from other projects on localhost
