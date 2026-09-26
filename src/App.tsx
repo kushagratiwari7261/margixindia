@@ -9,12 +9,26 @@ import AudienceSection from './components/sections/AudienceSection';
 import BackhaulSection from './components/sections/BackhaulSection';
 import Footer from './components/layout/Footer';
 import ContactModal from './components/modals/ContactModal';
+import RegisterModal from './components/modals/RegisterModal';
 import { ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 function App() {
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+
+  useEffect(() => {
+    const isRegistered = localStorage.getItem('isRegistered') === 'true';
+    const hasDismissed = sessionStorage.getItem('hasDismissedRegister') === 'true';
+    
+    if (!isRegistered && !hasDismissed) {
+      const timer = setTimeout(() => {
+        setIsRegisterOpen(true);
+      }, 7000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,6 +90,7 @@ function App() {
       </AnimatePresence>
 
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+      <RegisterModal isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
     </div>
   );
 }

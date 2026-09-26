@@ -74,7 +74,7 @@ export default function FeaturesSection() {
               {/* Realistic Image: Load Optimization */}
               <div className="absolute bottom-0 right-0 w-full h-1/2 md:w-1/2 md:h-full pointer-events-none rounded-b-3xl md:rounded-r-3xl overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-white via-white/80 md:via-white/50 to-transparent z-10" />
-                <img src="/images/feature_load.jpg" alt="Load Optimization" className="w-full h-full object-cover object-left" />
+                <img src="/images/feature_load.jpg" alt="Load Optimization" loading="lazy" className="w-full h-full object-cover object-left" />
               </div>
             </div>
           </BentoCard>
@@ -90,7 +90,7 @@ export default function FeaturesSection() {
               {/* Realistic Image: Route Intelligence */}
               <div className="absolute bottom-0 left-0 w-full h-48 pointer-events-none overflow-hidden rounded-b-3xl">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                <img src="/images/feature_route.jpg" alt="Route Intelligence" className="w-full h-full object-cover object-bottom" />
+                <img src="/images/feature_route.jpg" alt="Route Intelligence" loading="lazy" className="w-full h-full object-cover object-bottom" />
               </div>
             </div>
           </BentoCard>
@@ -109,7 +109,7 @@ export default function FeaturesSection() {
               <div className="absolute bottom-0 left-0 md:top-0 md:left-1/2 w-full md:w-1/2 h-48 md:h-full pointer-events-none overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent z-10 hidden md:block" />
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10 md:hidden" />
-                <img src="/images/feature_backhaul.jpg" alt="Backhaul Optimization" className="w-full h-full object-cover object-right" />
+                <img src="/images/feature_backhaul.jpg" alt="Backhaul Optimization" loading="lazy" className="w-full h-full object-cover object-right" />
               </div>
             </div>
           </BentoCard>

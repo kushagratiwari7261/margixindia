@@ -71,7 +71,7 @@ export default function AudienceSection() {
               {/* Header */}
               <div className="flex items-center gap-6 mb-8">
                 <div className="w-20 h-20 rounded-full border-4 border-white shadow-xl overflow-hidden shrink-0 bg-neutral-100">
-                  <img src="/images/audience_vendor.jpg" alt="Vendor" className="w-full h-full object-cover" />
+                  <img src="/images/audience_vendor.jpg" alt="Vendor" loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <span className="text-xs font-black uppercase tracking-widest text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200 block w-max mb-2">
@@ -151,7 +151,7 @@ export default function AudienceSection() {
               {/* Header */}
               <div className="flex items-center gap-6 mb-8">
                 <div className="w-20 h-20 rounded-full border-4 border-neutral-800 shadow-2xl overflow-hidden shrink-0 bg-neutral-900">
-                  <img src="/images/audience_fleet.jpg" alt="Fleet Owner" className="w-full h-full object-cover" />
+                  <img src="/images/audience_fleet.jpg" alt="Fleet Owner" loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <span className="text-xs font-black uppercase tracking-widest text-margix-yellow bg-white/5 px-3 py-1 rounded-full border border-white/10 block w-max mb-2">

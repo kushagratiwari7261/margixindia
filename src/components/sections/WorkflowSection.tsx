@@ -213,7 +213,7 @@ export default function WorkflowSection() {
                                   transition={{ duration: 0.5, delay: 0.2 }}
                                   className="mt-4 mb-2 w-full h-[25vh] sm:h-[35vh] rounded-xl overflow-hidden relative shadow-md bg-white"
                                 >
-                                  <img src={stage.image} alt={stage.title} className="w-full h-full object-contain mix-blend-multiply" />
+                                  <img src={stage.image} alt={stage.title} loading="lazy" className="w-full h-full object-contain mix-blend-multiply" />
                                 </motion.div>
                               )}
                             </motion.div>
