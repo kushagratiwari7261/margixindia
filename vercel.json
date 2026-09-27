@@ -2,11 +2,15 @@
   "rewrites": [
     {
       "source": "/vendor",
-      "destination": "https://margixindia.vercel.app/"
+      "destination": "https://margixindia.vercel.app/vendor"
     },
     {
-      "source": "/vendor/:path*",
-      "destination": "https://margixindia.vercel.app/:path*"
+      "source": "/vendor/(.*)",
+      "destination": "https://margixindia.vercel.app/vendor/$1"
+    },
+    {
+      "source": "/assets/(.*)",
+      "destination": "https://margixindia.vercel.app/assets/$1"
     }
   ]
 }
