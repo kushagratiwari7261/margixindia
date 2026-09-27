@@ -1,32 +1,43 @@
 {
   "rewrites": [
-    {
-      "source": "/vendor/vite.svg",
-      "destination": "/logo.png"
-    },
-    {
-      "source": "/vite.svg",
-      "destination": "/logo.png"
-    },
-    {
-      "source": "/vendor/favicon.ico",
-      "destination": "/logo.png"
-    },
-    {
-      "source": "/favicon.ico",
-      "destination": "/logo.png"
-    },
-    {
-      "source": "/vendor",
-      "destination": "https://margixindia.vercel.app/vendor"
-    },
-    {
-      "source": "/vendor/(.*)",
-      "destination": "https://margixindia.vercel.app/vendor/$1"
-    },
-    {
-      "source": "/assets/(.*)",
-      "destination": "https://margixindia.vercel.app/assets/$1"
-    }
+    { "source": "/vite.svg", "destination": "/logo.png" },
+    { "source": "/favicon.ico", "destination": "/logo.png" },
+    { "source": "/vendor/vite.svg", "destination": "/logo.png" },
+    { "source": "/vendor/favicon.ico", "destination": "/logo.png" },
+    
+    { "source": "/assets/(.*)", "destination": "https://margixindia.vercel.app/assets/$1" },
+    { "source": "/api/(.*)", "destination": "https://margixindia.vercel.app/api/$1" },
+    
+    { "source": "/vendor", "destination": "https://margixindia.vercel.app/vendor" },
+    { "source": "/vendor/(.*)", "destination": "https://margixindia.vercel.app/vendor/$1" },
+    { "source": "/login", "destination": "https://margixindia.vercel.app/login" },
+    { "source": "/login/(.*)", "destination": "https://margixindia.vercel.app/login/$1" },
+    { "source": "/3pl", "destination": "https://margixindia.vercel.app/3pl" },
+    { "source": "/3pl/(.*)", "destination": "https://margixindia.vercel.app/3pl/$1" },
+    { "source": "/3pl-portal", "destination": "https://margixindia.vercel.app/3pl-portal" },
+    { "source": "/3pl-portal/(.*)", "destination": "https://margixindia.vercel.app/3pl-portal/$1" },
+    { "source": "/3pl-network", "destination": "https://margixindia.vercel.app/3pl-network" },
+    { "source": "/3pl-network/(.*)", "destination": "https://margixindia.vercel.app/3pl-network/$1" },
+    { "source": "/dashboard", "destination": "https://margixindia.vercel.app/dashboard" },
+    { "source": "/dashboard/(.*)", "destination": "https://margixindia.vercel.app/dashboard/$1" },
+    { "source": "/track", "destination": "https://margixindia.vercel.app/track" },
+    { "source": "/track/(.*)", "destination": "https://margixindia.vercel.app/track/$1" },
+    { "source": "/driver", "destination": "https://margixindia.vercel.app/driver" },
+    { "source": "/driver/(.*)", "destination": "https://margixindia.vercel.app/driver/$1" },
+    { "source": "/shipments", "destination": "https://margixindia.vercel.app/shipments" },
+    { "source": "/shipments/(.*)", "destination": "https://margixindia.vercel.app/shipments/$1" },
+    
+    { "source": "/fleet", "destination": "https://margixindia.vercel.app/fleet" },
+    { "source": "/routes", "destination": "https://margixindia.vercel.app/routes" },
+    { "source": "/routes/(.*)", "destination": "https://margixindia.vercel.app/routes/$1" },
+    
+    { "source": "/analytics", "destination": "https://margixindia.vercel.app/analytics" },
+    { "source": "/superadmin", "destination": "https://margixindia.vercel.app/superadmin" },
+    { "source": "/ai-hub", "destination": "https://margixindia.vercel.app/ai-hub" },
+    { "source": "/cargo-network", "destination": "https://margixindia.vercel.app/cargo-network" },
+    { "source": "/emergency", "destination": "https://margixindia.vercel.app/emergency" },
+    { "source": "/optimize", "destination": "https://margixindia.vercel.app/optimize" },
+    { "source": "/capacity-bidding", "destination": "https://margixindia.vercel.app/capacity-bidding" },
+    { "source": "/live-map", "destination": "https://margixindia.vercel.app/live-map" }
   ]
 }
