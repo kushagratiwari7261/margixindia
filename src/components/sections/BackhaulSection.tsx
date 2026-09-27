@@ -120,7 +120,7 @@ export default function BackhaulSection() {
             src="/assets/backhaul-video.mp4"
             muted={isMuted}
             playsInline
-            preload="auto"
+            preload="none"
             poster="/assets/backhaul.png"
             className="w-full h-auto object-cover"
           />
