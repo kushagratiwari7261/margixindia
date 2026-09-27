@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/vendor/vite.svg",
+      "destination": "/logo.png"
+    },
+    {
+      "source": "/vite.svg",
+      "destination": "/logo.png"
+    },
+    {
       "source": "/vendor",
       "destination": "https://margixindia.vercel.app/vendor"
     },
