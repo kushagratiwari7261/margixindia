@@ -65,13 +65,19 @@ export default function Navbar({ onOpenContact }: NavbarProps) {
             </div>
 
             {/* Desktop CTA */}
-            <div className="hidden md:flex items-center">
+            <div className="hidden md:flex items-center gap-3">
               <button
                 onClick={onOpenContact}
                 className="bg-gradient-to-r from-margix-yellow to-yellow-400 text-margix-black px-6 py-2.5 rounded-md font-bold text-sm hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300 transform hover:-translate-y-0.5"
               >
                 Get Started
               </button>
+              <a
+                href="/vendor"
+                className="bg-white text-margix-black border-2 border-margix-yellow px-6 py-2 rounded-md font-bold text-sm hover:bg-yellow-50 hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 transform hover:-translate-y-0.5"
+              >
+                Post Your Load
+              </a>
             </div>
 
             {/* Mobile Menu Toggle */}
@@ -113,6 +119,12 @@ export default function Navbar({ onOpenContact }: NavbarProps) {
               >
                 Get Started Now
               </button>
+              <a
+                href="/vendor"
+                className="text-margix-black bg-white border-2 border-margix-yellow px-8 py-4 rounded-xl font-black text-lg text-center shadow-md mt-4"
+              >
+                Post Your Load
+              </a>
             </div>
           </motion.div>
         )}

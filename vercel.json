@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/vendor",
+      "destination": "https://margixindia.vercel.app/"
+    },
+    {
+      "source": "/vendor/:path*",
+      "destination": "https://margixindia.vercel.app/:path*"
+    }
+  ]
+}
