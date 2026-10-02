@@ -1,97 +1,154 @@
-import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, TrendingUp, Truck, Route } from 'lucide-react';
 
 interface HeroSectionProps {
   onOpenContact?: () => void;
 }
 
 export default function HeroSection({ onOpenContact }: HeroSectionProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.log("Auto-play was prevented by browser:", error);
-      });
-    }
-  }, []);
-
   return (
-    <section id="platform" className="relative min-h-screen w-full overflow-hidden flex items-center justify-center text-center pt-24 pb-12">
-      {/* Background Video */}
-      <video
-        ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
-        disablePictureInPicture
-        preload="auto"
-        poster="/assets/hero-poster.png"
-        className="absolute inset-0 w-full h-full object-cover z-0"
+    <section id="platform" className="relative min-h-screen w-full overflow-hidden">
+      {/* Background Image with slow zoom (Ken Burns effect) */}
+      <motion.div
+        initial={{ scale: 1.05 }}
+        animate={{ scale: 1.15 }}
+        transition={{ duration: 25, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+        className="absolute inset-0 w-full h-full z-0 origin-center"
       >
-        <source src="https://videos.pexels.com/video-files/29726641/12780046_1920_1080_30fps.mp4" type="video/mp4" />
-        <source src="https://videos.pexels.com/video-files/29726641/12780046_3840_2160_30fps.mp4" type="video/mp4" />
-      </video>
+        <img 
+          src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=2800&q=80" 
+          alt="Logistics background" 
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
 
-      {/* Overlay to make text readable */}
-      <div className="absolute inset-0 bg-margix-black/70 z-10"></div>
-      
-      {/* Bottom fade to seamlessly blend into the next section */}
-      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-margix-black to-transparent z-10 pointer-events-none"></div>
+      {/* Layered overlay for depth — not flat black */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/65 to-black/50 z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-margix-black via-transparent to-transparent z-10"></div>
 
       {/* Content */}
-      <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 flex flex-col items-center">
-        {/* Margix Logo */}
-        <div className="mb-8 flex flex-col items-center">
-            <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-16 h-12 md:w-[100px] md:h-[80px] mb-4">
-              {/* Speed lines */}
-              <rect x="10" y="40" width="20" height="6" rx="3" fill="#FFC107" />
-              <rect x="20" y="55" width="15" height="6" rx="3" fill="#FFC107" />
-              <rect x="5" y="70" width="25" height="6" rx="3" fill="#FFC107" />
-              
-              {/* M Shape */}
-              <path d="M35 85 L55 20 L75 55" stroke="#FFC107" strokeWidth="18" strokeLinejoin="miter" />
-              <path d="M60 70 L100 20" stroke="#FFC107" strokeWidth="18" />
-              
-              {/* Arrow Head */}
-              <polygon points="85,15 115,5 105,35" fill="#FFC107" />
-              
-              {/* Dark Overlap */}
-              <path d="M70 50 L95 85 L75 85 L60 62 Z" fill="#222" />
-            </svg>
-            <div className="flex items-baseline leading-none mb-2">
-              <span className="text-3xl md:text-6xl font-bold text-white tracking-tight">Margix</span>
-              <span className="text-3xl md:text-6xl font-bold text-margix-yellow tracking-tight">India</span>
-            </div>
-            <div className="flex items-center justify-between text-[10px] md:text-sm tracking-[0.3em] text-gray-300 font-bold w-full">
-              <span>MOVE</span>
-              <span className="text-margix-yellow scale-150 leading-none">•</span>
-              <span>CONNECT</span>
-              <span className="text-margix-yellow scale-150 leading-none">•</span>
-              <span>GROW</span>
-            </div>
-        </div>
-
-        {/* Quotation similar to BlackBuck */}
-        <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight mb-4 lg:mb-6">
-          India’s Intelligent <span className="text-margix-yellow">Transportation Platform</span>
-        </h1>
-
-        <p className="text-sm md:text-2xl text-gray-300 mb-8 lg:mb-10 max-w-4xl">
-          One platform to manage fleets, shipments, transporters, and logistics operations. Optimize costs, reduce empty miles, gain real-time visibility, and access verified transportation capacity
-        </p>
-
-        <div className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto px-4 sm:px-0">
-          <button 
-            onClick={onOpenContact}
-            className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 bg-margix-yellow text-margix-black rounded-lg font-bold text-base md:text-lg hover:bg-yellow-400 transition-colors shadow-lg shadow-yellow-500/20 cursor-pointer"
+      <div className="relative z-20 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-32 sm:pt-36 lg:pt-40 pb-16 lg:pb-24 min-h-screen flex flex-col justify-between">
+        
+        {/* Upper content area */}
+        <div className="flex-1 flex flex-col justify-center max-w-3xl">
+          
+          {/* Tagline pill */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-6 lg:mb-8"
           >
-            Optimize a Shipment
-          </button>
-          <a href="#how-it-works" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 bg-white/10 text-white border border-white/20 rounded-lg font-bold text-base md:text-lg hover:bg-white/20 transition-colors backdrop-blur-sm cursor-pointer">
-            See How It Works
-          </a>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-sm text-gray-300 font-medium tracking-wide backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+              India's logistics infrastructure, reimagined
+            </span>
+          </motion.div>
+
+          {/* Main heading — editorial, not template */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-bold text-white leading-[1.05] tracking-tight mb-6 lg:mb-8"
+          >
+            Move freight
+            <br />
+            smarter across
+            <br />
+            <span className="relative inline-block">
+              <span className="relative z-10">India.</span>
+              <span className="absolute bottom-1 sm:bottom-2 left-0 right-0 h-3 sm:h-4 bg-margix-yellow/30 -z-0 rounded-sm"></span>
+            </span>
+          </motion.h1>
+
+          {/* Subtext — concise, not a wall of text */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed mb-8 lg:mb-10 max-w-xl"
+          >
+            One platform to manage fleets, match loads, and optimize every mile. 
+            Real-time visibility. Verified capacity. Zero empty trucks.
+          </motion.p>
+
+          {/* CTA buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+          >
+            <button
+              onClick={onOpenContact}
+              className="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-margix-yellow text-margix-black rounded-lg font-semibold text-base hover:bg-yellow-400 transition-all duration-200 shadow-lg shadow-yellow-500/15 cursor-pointer"
+            >
+              Optimize a Shipment
+              <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
+            </button>
+            <a
+              href="#how-it-works"
+              className="inline-flex items-center justify-center px-7 py-3.5 text-white font-semibold text-base rounded-lg border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all duration-200 cursor-pointer"
+            >
+              See How It Works
+            </a>
+          </motion.div>
         </div>
+
+        {/* Bottom stats strip — compact, editorial */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-12 lg:mt-0"
+        >
+          <div className="border-t border-white/10 pt-8 lg:pt-10">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 lg:gap-16">
+              
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-margix-yellow/10 flex items-center justify-center">
+                  <TrendingUp size={20} className="text-margix-yellow" />
+                </div>
+                <div>
+                  <div className="text-2xl lg:text-3xl font-bold text-white tracking-tight">97%</div>
+                  <div className="text-xs text-gray-400 font-medium uppercase tracking-widest mt-0.5">Load utilization</div>
+                  <p className="text-sm text-gray-500 mt-1.5 leading-snug hidden lg:block">
+                    Maximize every trailer, every trip. More freight per truck.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                  <Truck size={20} className="text-emerald-400" />
+                </div>
+                <div>
+                  <div className="text-2xl lg:text-3xl font-bold text-white tracking-tight">3%</div>
+                  <div className="text-xs text-gray-400 font-medium uppercase tracking-widest mt-0.5">Empty capacity</div>
+                  <p className="text-sm text-gray-500 mt-1.5 leading-snug hidden lg:block">
+                    Near-zero deadhead miles. Every return trip matched.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                  <Route size={20} className="text-blue-400" />
+                </div>
+                <div>
+                  <div className="text-2xl lg:text-3xl font-bold text-white tracking-tight">24%</div>
+                  <div className="text-xs text-gray-400 font-medium uppercase tracking-widest mt-0.5">Cost savings</div>
+                  <p className="text-sm text-gray-500 mt-1.5 leading-snug hidden lg:block">
+                    Intelligent routing cuts spend by a quarter.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );
