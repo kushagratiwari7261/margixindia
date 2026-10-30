@@ -6,13 +6,11 @@ import ProblemSolutionSection from './components/sections/ProblemSolutionSection
 import BusinessSuiteSection from './components/sections/BusinessSuiteSection';
 import LogisticsSuiteSection from './components/sections/LogisticsSuiteSection';
 import UnifiedFlowSection from './components/sections/UnifiedFlowSection';
-import MobileAppsSection from './components/sections/MobileAppsSection';
 import WorkflowSection from './components/sections/WorkflowSection';
 import BackhaulSection from './components/sections/BackhaulSection';
+import AudienceSection from './components/sections/AudienceSection';
 import FutureSolutionsSection from './components/sections/FutureSolutionsSection';
-import IndustrySection from './components/sections/IndustrySection';
 import PrinciplesSection from './components/sections/PrinciplesSection';
-import RoadmapSection from './components/sections/RoadmapSection';
 import Footer from './components/layout/Footer';
 import ContactModal from './components/modals/ContactModal';
 import RegisterModal from './components/modals/RegisterModal';
@@ -31,7 +29,7 @@ function App() {
     if (!isRegistered && !hasDismissed) {
       const timer = setTimeout(() => {
         setIsRegisterOpen(true);
-      }, 9000);
+      }, 10000);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -51,7 +49,7 @@ function App() {
 
   const scrollToTop = () => {
     const startY = window.scrollY;
-    const duration = 1200;
+    const duration = 1000;
     let startTime: number | null = null;
 
     const ease = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -69,48 +67,42 @@ function App() {
   const handleOpenContact = () => setIsContactOpen(true);
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white font-sans selection:bg-margix-yellow selection:text-black relative">
+    <div className="min-h-screen bg-margix-black text-white font-sans selection:bg-margix-yellow selection:text-black relative">
       <Navbar onOpenContact={handleOpenContact} />
       
       <main>
         {/* 1. Hero: Vision, 15 apps, Replaces Tally, Zero Retyping */}
         <HeroSection onOpenContact={handleOpenContact} />
         
-        {/* 2. Key Metrics: Business & Freight Impact */}
+        {/* 2. Key Metrics: Business & Freight Transformation */}
         <MetricsSection />
 
-        {/* 3. The Shift: The Broken Reality vs Margix Unified Core */}
+        {/* 3. The Core Shift: The Broken Reality vs Margix Unified Core */}
         <ProblemSolutionSection onOpenContact={handleOpenContact} />
 
-        {/* 4. Product Family 1: Business Suite (9 Modular Day-One Apps) */}
+        {/* 4. Product Family 1: Business Suite (9 Modular Apps) */}
         <BusinessSuiteSection onOpenContact={handleOpenContact} />
 
-        {/* 5. Product Family 2: Logistics Suite (6 Connected Apps) */}
+        {/* 5. Product Family 2: Logistics Platform (6 Connected Apps) */}
         <LogisticsSuiteSection onOpenContact={handleOpenContact} />
 
-        {/* 6. The 7-Step Unified Order Flow: Retailer -> Distributor -> Transporter */}
+        {/* 6. The 7-Step Unified Order Flow: Zero Retyping between Buyer, Seller & Trucker */}
         <UnifiedFlowSection />
 
-        {/* 7. Field Operations: 2 Offline Android Mobile Apps */}
-        <MobileAppsSection onOpenContact={handleOpenContact} />
-
-        {/* 8. Intelligent Operations: 3D Packing & Route Intelligence */}
+        {/* 7. Intelligent Route & Load Optimization with Real Illustrations */}
         <WorkflowSection />
 
-        {/* 9. Backhaul Advantage: Interactive Video & Deadhead Elimination */}
+        {/* 8. The Backhaul Advantage & Video Demonstration */}
         <BackhaulSection />
 
-        {/* 10. All Further Solutions: Retail POS, Multilingual AI Copilot, ONDC, MRP, HR/Payroll, B2B Network, Working Capital */}
+        {/* 9. Tailored for Every Stakeholder (Shippers & Fleet Owners) with Real Photography */}
+        <AudienceSection onOpenContact={handleOpenContact} />
+
+        {/* 10. All Further & Upcoming Solutions We Are Delivering */}
         <FutureSolutionsSection onOpenContact={handleOpenContact} />
 
-        {/* 11. Industry Solutions: Auto-configured fields for Steel, Garments, FMCG, etc. */}
-        <IndustrySection onOpenContact={handleOpenContact} />
-
-        {/* 12. Core Principles: Built for India, Pay per app, Phone OTP, AWS Mumbai */}
+        {/* 11. Guiding Principles Built for Indian MSMEs */}
         <PrinciplesSection />
-
-        {/* 13. Product Roadmap: Phase 1, Phase 2, Phase 3 Delivery Timeline */}
-        <RoadmapSection onOpenContact={handleOpenContact} />
       </main>
 
       {/* Corporate Footer: Margix Pvt Ltd */}

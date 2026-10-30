@@ -3,7 +3,7 @@ import {
   PackageCheck, 
   Layers, 
   Receipt, 
-  Repeat 
+  RefreshCw 
 } from 'lucide-react';
 
 const metrics = [
@@ -11,48 +11,36 @@ const metrics = [
     label: 'Modular Day-One Apps',
     value: '15',
     suffix: '',
-    description: '9 Business suite apps + 6 Logistics apps sharing one core customer and item database.',
-    icon: <Layers size={22} strokeWidth={1.8} />,
-    accentColor: 'text-margix-yellow',
-    bgColor: 'bg-margix-yellow/10',
-    borderHover: 'hover:border-margix-yellow/40',
+    description: '9 Business Suite apps + 6 Logistics apps sharing one core customer and ledger database.',
+    icon: <Layers size={22} strokeWidth={2} />,
   },
   {
-    label: 'Tally Replacement',
+    label: 'Tally & GST Replacement',
     value: '100',
     suffix: '%',
-    description: 'Double-entry accounting, real-time balance sheet, P&L, TDS, and direct GSTR-1 & 3B generation.',
-    icon: <Receipt size={22} strokeWidth={1.8} />,
-    accentColor: 'text-emerald-500',
-    bgColor: 'bg-emerald-500/10',
-    borderHover: 'hover:border-emerald-500/40',
+    description: 'Double-entry accounting, real-time P&L, balance sheet, TDS, e-way bills, and GSTR-1/3B data.',
+    icon: <Receipt size={22} strokeWidth={2} />,
   },
   {
     label: 'Manual Retyping',
     value: '0',
     suffix: '%',
-    description: 'Buyer PO becomes seller sales order, invoice auto-generates e-way bills and pushes loads to truckers.',
-    icon: <Repeat size={22} strokeWidth={1.8} />,
-    accentColor: 'text-blue-500',
-    bgColor: 'bg-blue-500/10',
-    borderHover: 'hover:border-blue-500/40',
+    description: 'Buyer PO becomes seller sales order, invoice auto-generates e-way bills and pushes freight to truckers.',
+    icon: <RefreshCw size={22} strokeWidth={2} />,
   },
   {
     label: 'Fleet Load Utilization',
     value: '97',
     suffix: '%',
     description: 'Maximizes trailer volume and eliminates empty deadhead miles with automated backhaul return matching.',
-    icon: <PackageCheck size={22} strokeWidth={1.8} />,
-    accentColor: 'text-violet-500',
-    bgColor: 'bg-violet-500/10',
-    borderHover: 'hover:border-violet-500/40',
+    icon: <PackageCheck size={22} strokeWidth={2} />,
   },
 ];
 
 export default function MetricsSection() {
   return (
-    <section className="relative z-20 bg-white py-20 lg:py-24 border-b border-neutral-100">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+    <section className="relative z-20 bg-white py-20 lg:py-24 border-b border-neutral-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section header */}
         <motion.div 
@@ -62,18 +50,18 @@ export default function MetricsSection() {
           transition={{ duration: 0.5 }}
           className="mb-14 max-w-2xl"
         >
-          <p className="text-xs font-bold text-amber-700 uppercase tracking-widest mb-2">Measurable Impact</p>
+          <p className="text-xs font-bold text-amber-700 uppercase tracking-widest mb-2">Platform Impact</p>
           <h2 className="text-3xl sm:text-4xl font-black text-neutral-900 tracking-tight leading-tight">
             Designed to Cut Cost & Time <br className="hidden sm:block" />
             Across Every Department.
           </h2>
           <p className="mt-3 text-base text-neutral-600 leading-relaxed">
-            From the accounting desk to the highway truck cabin, Margix delivers verified operational efficiency on real Indian trade routes.
+            From the accounting desk to the highway truck cabin, Margix Pvt Ltd delivers verified operational efficiency on real Indian trade routes.
           </p>
         </motion.div>
 
         {/* Metrics grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {metrics.map((metric, idx) => (
             <motion.div
               key={idx}
@@ -81,10 +69,10 @@ export default function MetricsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08, duration: 0.45, ease: "easeOut" }}
-              className={`group relative rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 lg:p-7 transition-all duration-300 ${metric.borderHover} hover:bg-white hover:shadow-xl hover:shadow-neutral-200/50 hover:-translate-y-1`}
+              className="group relative rounded-2xl border border-neutral-200 bg-neutral-50/70 p-6 lg:p-7 transition-all duration-300 hover:border-margix-yellow hover:bg-white hover:shadow-xl hover:shadow-yellow-500/10 hover:-translate-y-1"
             >
               {/* Icon */}
-              <div className={`inline-flex items-center justify-center w-11 h-11 rounded-xl ${metric.bgColor} ${metric.accentColor} mb-5`}>
+              <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-margix-yellow/15 text-amber-800 mb-5">
                 {metric.icon}
               </div>
 
@@ -94,7 +82,7 @@ export default function MetricsSection() {
                   {metric.value}
                 </span>
                 {metric.suffix && (
-                  <span className={`text-2xl lg:text-3xl font-black ${metric.accentColor} leading-none`}>
+                  <span className="text-2xl lg:text-3xl font-black text-amber-600 leading-none">
                     {metric.suffix}
                   </span>
                 )}
@@ -110,8 +98,8 @@ export default function MetricsSection() {
                 {metric.description}
               </p>
 
-              {/* Subtle bottom accent line */}
-              <div className={`absolute bottom-0 left-6 right-6 h-0.5 ${metric.bgColor} rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+              {/* Accent line on hover */}
+              <div className="absolute bottom-0 left-6 right-6 h-1 bg-margix-yellow rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </motion.div>
           ))}
         </div>
