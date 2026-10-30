@@ -1,52 +1,57 @@
 import { motion } from 'framer-motion';
-import { PackageCheck, Fuel, IndianRupee, RefreshCw } from 'lucide-react';
+import { 
+  PackageCheck, 
+  Layers, 
+  Receipt, 
+  Repeat 
+} from 'lucide-react';
 
 const metrics = [
   {
-    label: 'Load Utilization',
+    label: 'Modular Day-One Apps',
+    value: '15',
+    suffix: '',
+    description: '9 Business suite apps + 6 Logistics apps sharing one core customer and item database.',
+    icon: <Layers size={22} strokeWidth={1.8} />,
+    accentColor: 'text-margix-yellow',
+    bgColor: 'bg-margix-yellow/10',
+    borderHover: 'hover:border-margix-yellow/40',
+  },
+  {
+    label: 'Tally Replacement',
+    value: '100',
+    suffix: '%',
+    description: 'Double-entry accounting, real-time balance sheet, P&L, TDS, and direct GSTR-1 & 3B generation.',
+    icon: <Receipt size={22} strokeWidth={1.8} />,
+    accentColor: 'text-emerald-500',
+    bgColor: 'bg-emerald-500/10',
+    borderHover: 'hover:border-emerald-500/40',
+  },
+  {
+    label: 'Manual Retyping',
+    value: '0',
+    suffix: '%',
+    description: 'Buyer PO becomes seller sales order, invoice auto-generates e-way bills and pushes loads to truckers.',
+    icon: <Repeat size={22} strokeWidth={1.8} />,
+    accentColor: 'text-blue-500',
+    bgColor: 'bg-blue-500/10',
+    borderHover: 'hover:border-blue-500/40',
+  },
+  {
+    label: 'Fleet Load Utilization',
     value: '97',
     suffix: '%',
-    description: 'Maximize trailer space on every trip, significantly increasing the volume of freight transported per truck.',
+    description: 'Maximizes trailer volume and eliminates empty deadhead miles with automated backhaul return matching.',
     icon: <PackageCheck size={22} strokeWidth={1.8} />,
-    accentColor: 'text-margix-yellow',
-    bgColor: 'bg-margix-yellow/8',
-    borderHover: 'hover:border-margix-yellow/30',
-  },
-  {
-    label: 'Empty Capacity',
-    value: '3',
-    suffix: '%',
-    description: 'Drastically reduce deadhead miles and eliminate wasted capacity by seamlessly matching return loads.',
-    icon: <Fuel size={22} strokeWidth={1.8} />,
-    accentColor: 'text-emerald-500',
-    bgColor: 'bg-emerald-500/8',
-    borderHover: 'hover:border-emerald-500/30',
-  },
-  {
-    label: 'Cost Savings',
-    value: '24',
-    suffix: '%',
-    description: 'Lower overall operational costs and transport spend through intelligent route and load optimization.',
-    icon: <IndianRupee size={22} strokeWidth={1.8} />,
-    accentColor: 'text-blue-500',
-    bgColor: 'bg-blue-500/8',
-    borderHover: 'hover:border-blue-500/30',
-  },
-  {
-    label: 'Backhaul Match',
-    value: '85',
-    suffix: '%',
-    description: 'Guarantee automated return trips and seamless return routing with instant verified transporter matches.',
-    icon: <RefreshCw size={22} strokeWidth={1.8} />,
     accentColor: 'text-violet-500',
-    bgColor: 'bg-violet-500/8',
-    borderHover: 'hover:border-violet-500/30',
+    bgColor: 'bg-violet-500/10',
+    borderHover: 'hover:border-violet-500/40',
   },
 ];
 
 export default function MetricsSection() {
   return (
-    <section className="relative z-20 bg-white py-20 lg:py-28">
+    <section className="relative z-20 bg-white py-20 lg:py-24 border-b border-neutral-100">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
         
         {/* Section header */}
@@ -55,16 +60,15 @@ export default function MetricsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-14 lg:mb-18 max-w-2xl"
+          className="mb-14 max-w-2xl"
         >
-          <p className="text-sm font-semibold text-margix-yellow uppercase tracking-widest mb-3">Performance</p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-margix-black tracking-tight leading-tight">
-            Numbers that speak
-            <br className="hidden sm:block" />
-            for themselves.
+          <p className="text-xs font-bold text-amber-700 uppercase tracking-widest mb-2">Measurable Impact</p>
+          <h2 className="text-3xl sm:text-4xl font-black text-neutral-900 tracking-tight leading-tight">
+            Designed to Cut Cost & Time <br className="hidden sm:block" />
+            Across Every Department.
           </h2>
-          <p className="mt-4 text-base lg:text-lg text-gray-500 leading-relaxed max-w-lg">
-            Every metric below is a result of our intelligent matching engine working on real loads, real routes, across India.
+          <p className="mt-3 text-base text-neutral-600 leading-relaxed">
+            From the accounting desk to the highway truck cabin, Margix delivers verified operational efficiency on real Indian trade routes.
           </p>
         </motion.div>
 
@@ -77,7 +81,7 @@ export default function MetricsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08, duration: 0.45, ease: "easeOut" }}
-              className={`group relative rounded-2xl border border-gray-100 bg-white p-6 lg:p-7 transition-all duration-300 ${metric.borderHover} hover:shadow-lg hover:shadow-gray-100/80 hover:-translate-y-1`}
+              className={`group relative rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 lg:p-7 transition-all duration-300 ${metric.borderHover} hover:bg-white hover:shadow-xl hover:shadow-neutral-200/50 hover:-translate-y-1`}
             >
               {/* Icon */}
               <div className={`inline-flex items-center justify-center w-11 h-11 rounded-xl ${metric.bgColor} ${metric.accentColor} mb-5`}>
@@ -86,21 +90,23 @@ export default function MetricsSection() {
 
               {/* Value */}
               <div className="flex items-baseline gap-1 mb-1.5">
-                <span className="text-4xl lg:text-5xl font-bold text-margix-black tracking-tight leading-none">
+                <span className="text-4xl lg:text-5xl font-black text-neutral-900 tracking-tight leading-none">
                   {metric.value}
                 </span>
-                <span className={`text-2xl lg:text-3xl font-bold ${metric.accentColor} leading-none`}>
-                  {metric.suffix}
-                </span>
+                {metric.suffix && (
+                  <span className={`text-2xl lg:text-3xl font-black ${metric.accentColor} leading-none`}>
+                    {metric.suffix}
+                  </span>
+                )}
               </div>
 
               {/* Label */}
-              <div className="text-sm font-semibold text-margix-black mb-3">
+              <div className="text-sm font-bold text-neutral-900 mb-2">
                 {metric.label}
               </div>
 
               {/* Description */}
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
                 {metric.description}
               </p>
 
