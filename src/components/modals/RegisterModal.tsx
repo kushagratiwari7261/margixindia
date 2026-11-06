@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowRight, Loader2, CheckCircle2, Sparkles } from 'lucide-react';
+import { X, ArrowRight, Loader2, CheckCircle2 } from 'lucide-react';
 import logo from '../../assets/logo.png';
 import { supabase } from '../../lib/supabase';
 
