@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/layout/Navbar';
-import HeroSection from './components/hero/HeroSection';
-import MetricsSection from './components/sections/MetricsSection';
+import SplitPortal from './components/hero/SplitPortal';
+import SoftwareHero from './components/hero/SoftwareHero';
+import LogisticsHero from './components/hero/LogisticsHero';
 import ProblemSolutionSection from './components/sections/ProblemSolutionSection';
 import BusinessSuiteSection from './components/sections/BusinessSuiteSection';
 import LogisticsSuiteSection from './components/sections/LogisticsSuiteSection';
+import IndustriesSection from './components/sections/IndustriesSection';
 import UnifiedFlowSection from './components/sections/UnifiedFlowSection';
 import WorkflowSection from './components/sections/WorkflowSection';
 import BackhaulSection from './components/sections/BackhaulSection';
@@ -13,122 +15,232 @@ import FutureSolutionsSection from './components/sections/FutureSolutionsSection
 import PrinciplesSection from './components/sections/PrinciplesSection';
 import Footer from './components/layout/Footer';
 import ContactModal from './components/modals/ContactModal';
-import RegisterModal from './components/modals/RegisterModal';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-function App() {
-  const [isAtBottom, setIsAtBottom] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+export type DivisionView = 'portal' | 'software' | 'logistics';
 
+function App() {
+  const [view, setView] = useState<DivisionView>(() => {
+    const hash = window.location.hash.toLowerCase();
+    if (hash.includes('software')) return 'software';
+    if (hash.includes('logistics')) return 'logistics';
+    return 'portal';
+  });
+
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
+  // Sync state with browser hash history
   useEffect(() => {
-    const isRegistered = localStorage.getItem('isRegistered') === 'true';
-    const hasDismissed = sessionStorage.getItem('hasDismissedRegister') === 'true';
-    
-    if (!isRegistered && !hasDismissed) {
-      const timer = setTimeout(() => {
-        setIsRegisterOpen(true);
-      }, 10000);
-      return () => clearTimeout(timer);
-    }
+    const handleHashChange = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash.includes('software')) setView('software');
+      else if (hash.includes('logistics')) setView('logistics');
+      else setView('portal');
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  // Track scroll position: arrow button for going up is visible whenever scrolled down
   useEffect(() => {
+    if (view === 'portal') {
+      setShowScrollTop(false);
+      return;
+    }
+
     const handleScroll = () => {
-      const scrollPosition = window.innerHeight + window.scrollY;
-      const threshold = document.documentElement.scrollHeight - 500;
-      setIsAtBottom(scrollPosition >= threshold);
+      setShowScrollTop(window.scrollY > 220);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [view]);
+
+  const navigateTo = (newView: DivisionView) => {
+    setView(newView);
+    if (newView === 'portal') {
+      window.history.pushState(null, '', window.location.pathname);
+    } else {
+      window.location.hash = newView;
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
 
   const scrollToTop = () => {
-    const startY = window.scrollY;
-    const duration = 1000;
-    let startTime: number | null = null;
-
-    const ease = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      window.scrollTo(0, startY - startY * ease(progress));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleOpenContact = () => setIsContactOpen(true);
 
+  // --------------------------------------------------------------------------
+  // VIEW 1: HOME PORTAL (FULL SCREEN, NO SCROLL, ONLY THE SPLIT SLIDE)
+  // --------------------------------------------------------------------------
+  if (view === 'portal') {
+    return (
+  <div className="h-screen w-screen overflow-hidden bg-[#08101d] font-sans selection:bg-amber-100 selection:text-amber-900">
+    <SplitPortal onSelectDivision={navigateTo} onOpenContact={handleOpenContact} />
+    <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+  </div>
+    );
+}
+
+// --------------------------------------------------------------------------
+// VIEW 2: COMMERCIAL SOFTWARE PAGE
+// --------------------------------------------------------------------------
+if (view === 'software') {
   return (
-    <div className="min-h-screen bg-margix-black text-white font-sans selection:bg-margix-yellow selection:text-black relative">
-      <Navbar onOpenContact={handleOpenContact} />
-      
+    <div className="min-h-screen bg-white text-neutral-900 font-sans selection:bg-amber-100 selection:text-amber-900 relative">
+      <Navbar
+        activeView="software"
+        onNavigate={navigateTo}
+        onOpenContact={handleOpenContact}
+      />
+
       <main>
-        {/* 1. Hero: Vision, 15 apps, Replaces Tally, Zero Retyping */}
-        <HeroSection onOpenContact={handleOpenContact} />
-        
-        {/* 2. Key Metrics: Business & Freight Transformation */}
-        <MetricsSection />
+        {/* Software Hero Banner */}
+        <SoftwareHero onOpenContact={handleOpenContact} />
 
-        {/* 3. The Core Shift: The Broken Reality vs Margix Unified Core */}
-        <ProblemSolutionSection onOpenContact={handleOpenContact} />
-
-        {/* 4. Product Family 1: Business Suite (9 Modular Apps) */}
+        {/* 9 Modular ERP Apps Replacing Desktop Tally */}
         <BusinessSuiteSection onOpenContact={handleOpenContact} />
 
-        {/* 5. Product Family 2: Logistics Platform (6 Connected Apps) */}
-        <LogisticsSuiteSection onOpenContact={handleOpenContact} />
+        {/* Operational Reality vs Unified Solution */}
+        <ProblemSolutionSection onOpenContact={handleOpenContact} />
 
-        {/* 6. The 7-Step Unified Order Flow: Zero Retyping between Buyer, Seller & Trucker */}
+        {/* The Zero-Retyping Bridge: Invoice directly to Truck Dispatch */}
         <UnifiedFlowSection />
 
-        {/* 7. Intelligent Route & Load Optimization with Real Illustrations */}
-        <WorkflowSection />
+        {/* Target Industries Powered Across India */}
+        <IndustriesSection onOpenContact={handleOpenContact} />
 
-        {/* 8. The Backhaul Advantage & Video Demonstration */}
-        <BackhaulSection />
-
-        {/* 9. Tailored for Every Stakeholder (Shippers & Fleet Owners) with Real Photography */}
+        {/* Tailored for Shippers, Traders & Manufacturers */}
         <AudienceSection onOpenContact={handleOpenContact} />
 
-        {/* 10. All Further & Upcoming Solutions We Are Delivering */}
+        {/* Product Expansion & Roadmap */}
         <FutureSolutionsSection onOpenContact={handleOpenContact} />
 
-        {/* 11. Guiding Principles Built for Indian MSMEs */}
+        {/* Core Engineering Principles */}
         <PrinciplesSection />
       </main>
 
-      {/* Corporate Footer: Margix Pvt Ltd */}
-      <Footer />
-      
-      {/* Smooth Scroll to Top Button */}
+      <Footer onNavigate={navigateTo} />
+
+      {/* Floating Action Controls: Always-Visible Apply Button & Scroll-to-Top Arrow */}
+      <div className="fixed bottom-6 right-5 sm:right-6 z-50 flex items-center gap-2.5 pointer-events-auto">
+        {/* Always Visible Floating Apply Button */}
+        <motion.button
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+          onClick={handleOpenContact}
+          className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-full bg-[#0f172a] hover:bg-[#1e293b] text-white border border-[#D4A800]/50 shadow-2xl text-xs sm:text-sm font-bold tracking-wide transition-all cursor-pointer group"
+          aria-label="Apply Now"
+        >
+          <span className="w-2 h-2 rounded-full bg-[#F9CA24] animate-pulse" />
+          <span>Apply Now</span>
+          <ArrowRight size={14} className="text-[#F9CA24] group-hover:translate-x-1 transition-transform" />
+        </motion.button>
+
+        {/* Scroll-to-Top Arrow: Visible in all pages when scrolled down */}
+        <AnimatePresence>
+          {showScrollTop && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 10 }}
+              transition={{ duration: 0.2 }}
+              onClick={scrollToTop}
+              className="p-2.5 sm:p-2.5 rounded-full bg-white text-neutral-800 border border-neutral-300 shadow-xl hover:bg-neutral-100 hover:text-black active:translate-y-px transition-all cursor-pointer"
+              aria-label="Scroll to top"
+              title="Scroll to top"
+            >
+              <ArrowUp size={18} strokeWidth={2.5} />
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+    </div>
+  );
+}
+
+// --------------------------------------------------------------------------
+// VIEW 3: ROAD LOGISTICS PAGE
+// --------------------------------------------------------------------------
+return (
+  <div className="min-h-screen bg-white text-neutral-900 font-sans selection:bg-amber-100 selection:text-amber-900 relative">
+    <Navbar
+      activeView="logistics"
+      onNavigate={navigateTo}
+      onOpenContact={handleOpenContact}
+    />
+
+    <main>
+      {/* Logistics Hero Banner with Live Tracking & Freight Tariff Estimator */}
+      <LogisticsHero onOpenContact={handleOpenContact} />
+
+      {/* 6 Connected Freight Apps + Interactive 3D Trailer Volumetric Packing Simulator */}
+      <LogisticsSuiteSection onOpenContact={handleOpenContact} />
+
+      {/* Route & Freight Optimization Lifecycle */}
+      <WorkflowSection />
+
+      {/* Deadhead Elimination & Return Backhaul Matching */}
+      <BackhaulSection />
+
+      {/* Target Industries Powered Across India */}
+      <IndustriesSection onOpenContact={handleOpenContact} />
+
+      {/* Tailored for Transporters & Fleet Owners */}
+      <AudienceSection onOpenContact={handleOpenContact} />
+
+      {/* Fleet Reliability & Safety Principles */}
+      <PrinciplesSection />
+    </main>
+
+    <Footer onNavigate={navigateTo} />
+
+    {/* Floating Action Controls: Always-Visible Apply Button & Scroll-to-Top Arrow */}
+    <div className="fixed bottom-6 right-5 sm:right-6 z-50 flex items-center gap-2.5 pointer-events-auto">
+      {/* Always Visible Floating Apply Button */}
+      <motion.button
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.96 }}
+        onClick={handleOpenContact}
+        className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-full bg-[#0f172a] hover:bg-[#1e293b] text-white border border-[#D4A800]/50 shadow-2xl text-xs sm:text-sm font-bold tracking-wide transition-all cursor-pointer group"
+        aria-label="Apply Now"
+      >
+        <span className="w-2 h-2 rounded-full bg-[#F9CA24] animate-pulse" />
+        <span>Apply Now</span>
+        <ArrowRight size={14} className="text-[#F9CA24] group-hover:translate-x-1 transition-transform" />
+      </motion.button>
+
+      {/* Scroll-to-Top Arrow: Visible in all pages when scrolled down */}
       <AnimatePresence>
-        {isAtBottom && (
+        {showScrollTop && (
           <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+            transition={{ duration: 0.2 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-margix-yellow text-black shadow-2xl hover:shadow-yellow-500/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+            className="p-2.5 sm:p-2.5 rounded-full bg-white text-neutral-800 border border-neutral-300 shadow-xl hover:bg-neutral-100 hover:text-black active:translate-y-px transition-all cursor-pointer"
             aria-label="Scroll to top"
+            title="Scroll to top"
           >
-            <ArrowUp size={24} strokeWidth={2.5} />
+            <ArrowUp size={18} strokeWidth={2.5} />
           </motion.button>
         )}
       </AnimatePresence>
-
-      {/* Pilot & Contact Modals */}
-      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
-      <RegisterModal isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
     </div>
-  );
+
+    <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+  </div>
+);
 }
 
 export default App;

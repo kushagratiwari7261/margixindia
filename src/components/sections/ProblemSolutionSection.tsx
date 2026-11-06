@@ -1,17 +1,5 @@
 import { motion } from 'framer-motion';
-import { 
-  XCircle, 
-  CheckCircle2, 
-  FileText, 
-  PhoneCall, 
-  Repeat, 
-  Database, 
-  Layers, 
-  FileCheck2, 
-  Truck, 
-  Coins, 
-  ArrowRight
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface ProblemSolutionProps {
   onOpenContact?: () => void;
@@ -19,165 +7,93 @@ interface ProblemSolutionProps {
 
 export default function ProblemSolutionSection({ onOpenContact }: ProblemSolutionProps) {
   const problems = [
-    {
-      icon: <FileText className="text-neutral-700 shrink-0" size={20} />,
-      title: "Tally Locked to Desktop Office PCs",
-      desc: "Accounts and GST locked in a single computer. Branch managers and owners have no live view of cash, receivables, or stock without manual exports."
-    },
-    {
-      icon: <Repeat className="text-neutral-700 shrink-0" size={20} />,
-      title: "Data Retyped 4 Different Times",
-      desc: "A buyer sends a PO; seller retypes it as a sales order; staff retype it for an e-way bill; transporter retypes it into an LR; accountant re-enters it into Tally."
-    },
-    {
-      icon: <PhoneCall className="text-neutral-700 shrink-0" size={20} />,
-      title: "Logistics Chaos via Phone Calls & WhatsApp",
-      desc: "Finding trucks relies on frantic phone calls and unverified brokers. High empty return miles (deadhead), zero real-time tracking, and lost paper LRs."
-    },
-    {
-      icon: <Database className="text-neutral-700 shrink-0" size={20} />,
-      title: "Disconnected Department Software",
-      desc: "Billing in one tool, inventory on Excel, accounting in Tally, transport on paper. None of them talk to each other, leading to costly stockouts and errors."
-    }
+    'Tally locked to one desktop — no live view from anywhere',
+    'Same data retyped 4 times across billing, e-way bill, LR and accounts',
+    'Finding trucks via phone calls and unverified brokers',
+    'Billing, inventory, accounting and transport in separate tools',
   ];
 
   const solutions = [
-    {
-      icon: <Layers className="text-margix-yellow shrink-0" size={20} />,
-      title: "One Shared Core for Business & Freight",
-      desc: "All apps share identical customers, items, ledgers, and godowns. Run billing, stock, purchases, accounts, and trucks on one unified account."
-    },
-    {
-      icon: <FileCheck2 className="text-margix-yellow shrink-0" size={20} />,
-      title: "Zero Retyping Across Trade Partners",
-      desc: "A buyer's PO lands as a draft sales order at the seller. An invoice auto-generates e-way bills and pushes freight booking directly to verified truckers."
-    },
-    {
-      icon: <Truck className="text-margix-yellow shrink-0" size={20} />,
-      title: "Integrated FTL, PTL & Driver Mobile App",
-      desc: "Full truckloads and part-truckload godown networks with digital LR, live GPS tracking, and offline driver proof-of-delivery (POD) with photo & signature."
-    },
-    {
-      icon: <Coins className="text-margix-yellow shrink-0" size={20} />,
-      title: "Modular Pay-Per-App Flexibility",
-      desc: "Subscribe only to the apps you need today. Turn on or off anytime. Pausing an app never deletes your data, and nothing is typed twice."
-    }
+    'One shared core for billing, stock, accounts and freight',
+    'Zero retyping — invoice auto-generates e-way bill and freight booking',
+    'Verified fleets with GPS tracking and digital LR bilti',
+    'Pay only for the modules you use — turn on or off anytime',
   ];
 
   return (
-    <section id="vision" className="py-20 lg:py-28 bg-[#FAFAFA] text-neutral-900 border-b border-neutral-200 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 lg:mb-18">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-neutral-200 text-amber-800 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-            The Shift
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 tracking-tight mb-4">
-            Why Indian Commerce Needs <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-yellow-500">
-              A Unified Operating Platform
+    <section id="vision" className="relative py-24 lg:py-32 overflow-hidden">
+
+      {/* Artistic background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-white to-amber-500/8 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-[#F9CA24]/8 rounded-full blur-[100px] -translate-x-1/3 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-[#FDC101]/8 rounded-full blur-[80px] translate-x-1/4 pointer-events-none" />
+
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
+        <div className="max-w-2xl mx-auto text-center mb-16">
+            <span className="inline-block px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-bold tracking-wider text-[#B08D00] uppercase mb-3">
+              Why Margix
             </span>
-          </h2>
-          <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
-            Until now, running a trade or manufacturing business meant juggling Tally, multiple spreadsheets, and disconnected trucking brokers. Margix Pvt Ltd bridges that divide.
-          </p>
-        </div>
-
-        {/* Side-by-side comparison */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-12">
-          
-          {/* Old Broken Reality (White Card) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="rounded-3xl p-7 sm:p-10 bg-white border border-neutral-200 shadow-md flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center gap-3.5 mb-6 pb-6 border-b border-neutral-100">
-                <div className="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-700">
-                  <XCircle size={22} />
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-neutral-500 uppercase tracking-widest block">The Broken Reality</span>
-                  <h3 className="text-xl sm:text-2xl font-black text-neutral-900">Disconnected Tools & Retyping</h3>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                {problems.map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-4">
-                    <div className="mt-1 p-2 rounded-xl bg-neutral-100 shrink-0">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-neutral-900 text-base leading-snug">{item.title}</h4>
-                      <p className="text-neutral-600 text-sm leading-relaxed mt-1">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-neutral-950 tracking-tight">
+                Replace disconnected tools
+                <br />
+                <span className="font-serif italic font-normal text-[#D4A800]">with one platform.</span>
+              </h2>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-neutral-100 text-xs text-neutral-500">
-              Result: 15–20 hours wasted weekly on manual entry, lost shipments, and accounting reconciliation lag.
-            </div>
-          </motion.div>
+            {/* Side-by-side */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-          {/* Margix Unified Core (Dark Counterpart Card) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="rounded-3xl p-7 sm:p-10 bg-margix-black text-white border-2 border-margix-yellow shadow-2xl flex flex-col justify-between relative overflow-hidden"
-          >
-            {/* Ambient gold glow */}
-            <div className="absolute top-0 right-0 w-72 h-72 bg-margix-yellow/10 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="relative z-10">
-              <div className="flex items-center gap-3.5 mb-6 pb-6 border-b border-neutral-800">
-                <div className="w-10 h-10 rounded-xl bg-margix-yellow/20 text-margix-yellow flex items-center justify-center">
-                  <CheckCircle2 size={22} />
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-margix-yellow uppercase tracking-widest block">The Margix Way</span>
-                  <h3 className="text-xl sm:text-2xl font-black text-white">One Shared Core: Business + Freight</h3>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                {solutions.map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-4">
-                    <div className="mt-1 p-2 rounded-xl bg-neutral-900 border border-neutral-800 shrink-0">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-white text-base leading-snug">{item.title}</h4>
-                      <p className="text-neutral-400 text-sm leading-relaxed mt-1">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="relative z-10 mt-8 pt-6 border-t border-neutral-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="text-xs text-neutral-400">
-                Full replacement for Tally, Excel sheets, and phone brokers.
-              </div>
-              <button
-                onClick={onOpenContact}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-margix-yellow text-margix-black font-bold text-sm hover:bg-yellow-400 transition-colors cursor-pointer shadow-md"
+              {/* Before */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3 }}
+                className="rounded-2xl p-8 bg-white border border-neutral-200 shadow-sm"
               >
-                Join Closed Pilot
-                <ArrowRight size={16} />
-              </button>
+                <span className="text-xs font-bold text-neutral-400 uppercase tracking-wider">Before</span>
+                <h3 className="mt-1 text-xl font-extrabold text-neutral-900 mb-6">Manual work everywhere</h3>
+                <ul className="space-y-4">
+                  {problems.map((p, i) => (
+                    <li key={i} className="flex items-start gap-3 text-[15px] text-neutral-600 leading-relaxed">
+                      <span className="mt-1.5 w-2 h-2 rounded-full bg-neutral-300 shrink-0" />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* After */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="rounded-2xl p-8 bg-white border-2 border-[#F9CA24] shadow-sm"
+              >
+                <span className="text-xs font-bold text-[#B08D00] uppercase tracking-wider">With Margix</span>
+                <h3 className="mt-1 text-xl font-extrabold text-neutral-900 mb-6">Connected operations</h3>
+                <ul className="space-y-4">
+                  {solutions.map((s, i) => (
+                    <li key={i} className="flex items-start gap-3 text-[15px] text-neutral-700 leading-relaxed">
+                      <span className="mt-1.5 w-2 h-2 rounded-full bg-[#D4A800] shrink-0" />
+                      {s}
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={onOpenContact}
+                  className="mt-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-neutral-950 hover:bg-neutral-800 text-white text-xs font-semibold transition-all cursor-pointer"
+                >
+                  <span>Schedule Live Demo</span>
+                  <ArrowRight size={14} />
+                </button>
+              </motion.div>
             </div>
-          </motion.div>
 
         </div>
-
-      </div>
     </section>
   );
 }

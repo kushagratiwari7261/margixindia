@@ -1,24 +1,20 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Store, 
-  Bot, 
-  Users, 
-  Factory, 
-  Globe, 
-  Coins, 
-  Network, 
-  Sparkles, 
-  PhoneCall, 
-  Layers, 
-  ShieldCheck, 
-  Package, 
-  Wrench, 
-  Truck, 
-  BarChart, 
-  Code2, 
-  CheckCircle2, 
-  ArrowRight 
+import {
+  Store,
+  Factory,
+  Globe,
+  Coins,
+  Network,
+  Layers,
+  ShieldCheck,
+  Package,
+  Wrench,
+  Truck,
+  BarChart,
+  Code2,
+  ArrowRight,
+  Clock
 } from 'lucide-react';
 
 interface FutureSolutionsSectionProps {
@@ -26,285 +22,215 @@ interface FutureSolutionsSectionProps {
 }
 
 export default function FutureSolutionsSection({ onOpenContact }: FutureSolutionsSectionProps) {
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'retail' | 'ai' | 'operations' | 'ecosystem'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'software' | 'logistics' | 'fintech'>('all');
 
   const categories = [
-    { id: 'all', label: 'All Upcoming Solutions' },
-    { id: 'retail', label: 'Retail & Omnichannel' },
-    { id: 'ai', label: 'AI & Automation' },
-    { id: 'operations', label: 'Manufacturing & HR' },
-    { id: 'ecosystem', label: 'Network & Fintech' },
+    { id: 'all', label: 'All Expansion Modules' },
+    { id: 'software', label: 'Commercial Software' },
+    { id: 'logistics', label: 'Road Logistics' },
+    { id: 'fintech', label: 'B2B Trade & Financing' },
   ];
 
   const solutions = [
-    // 1. Retail & Omnichannel
+    // 1. Commercial Software
     {
-      category: 'retail',
-      icon: <Store size={22} className="text-margix-yellow" />,
+      category: 'software',
+      icon: <Store size={18} className="text-[#FF7D44]" />,
       title: "Point of Sale (POS) for Retail Counters",
-      phase: "Phase 2",
-      badge: "Retail Operations",
-      description: "Fast counter billing for hardware stores, supermarkets, and garment retailers. Features rapid barcode scanning, thermal receipt printing, cash drawer buffer, and offline transaction syncing."
+      phase: "Q1 2027",
+      badge: "Software Suite",
+      description: "Counter billing for retail shops, hardware distributors, and trade counters. Features barcode scanning, thermal receipt printing, cash drawer management, and offline transaction syncing."
     },
     {
-      category: 'retail',
-      icon: <Globe size={22} className="text-margix-yellow" />,
-      title: "ONDC, Amazon & Flipkart E-Commerce Sync",
-      phase: "Phase 2",
-      badge: "Omnichannel Commerce",
-      description: "Direct bi-directional sync with government-backed ONDC, Amazon India, Flipkart, and your branded online store. Unified inventory pool prevents overselling and auto-books courier or truck dispatch."
+      category: 'software',
+      icon: <Globe size={18} className="text-[#FF7D44]" />,
+      title: "ONDC, Amazon & Marketplace Connectors",
+      phase: "Q2 2027",
+      badge: "Software Suite",
+      description: "Two-way integration with ONDC, Amazon India, Flipkart, and proprietary web storefronts. Unified central inventory pool eliminates overselling and routes freight automatically."
     },
     {
-      category: 'retail',
-      icon: <Package size={22} className="text-margix-yellow" />,
-      title: "Express Parcel & Courier Shipping",
-      phase: "Phase 2",
-      badge: "Multi-Modal Freight",
-      description: "Seamless door-to-door courier booking for envelopes, cartons, and small parcels through India's premier courier partners alongside full-truck (FTL) and part-truck (PTL) operations."
-    },
-
-    // 2. AI & Automation
-    {
-      category: 'ai',
-      icon: <Bot size={22} className="text-margix-yellow" />,
-      title: "Multilingual AI Copilot (Voice & Chat)",
-      phase: "Phase 2",
-      badge: "Conversational AI",
-      description: "Voice and chat assistant fluent in English, Hindi, and regional Indian languages. Query inventory, draft orders, summarize debtor aging, and execute actions with strict human-in-the-loop confirmation."
-    },
-    {
-      category: 'ai',
-      icon: <PhoneCall size={22} className="text-margix-yellow" />,
-      title: "AI Voice-Calling Customer Agents",
-      phase: "Phase 2",
-      badge: "Autonomous Telephony",
-      description: "Smart outbound AI calling agents speaking Indian languages. Automatically calls retail buyers for payment reminders, confirms delivery addresses, and notifies consignees when trucks arrive at gates."
-    },
-    {
-      category: 'ai',
-      icon: <Truck size={22} className="text-margix-yellow" />,
-      title: "Spare Truck-Space Spot Bidding",
-      phase: "Phase 2",
-      badge: "Dynamic Capacity",
-      description: "Real-time spot auctions for fractional unutilized truck capacity. Transporters with partially filled trucks can auction leftover space to nearby shippers along their active route."
-    },
-    {
-      category: 'ai',
-      icon: <ShieldCheck size={22} className="text-margix-yellow" />,
-      title: "Full Transit Claims & Dispute Arbitration",
-      phase: "Phase 2",
-      badge: "Risk & Compliance",
-      description: "Standardized digital incident handling for in-transit damages, shortages, or delays. Captures geotagged photo evidence, insurance claims documentation, and fast-track dispute settlement."
-    },
-
-    // 3. Manufacturing & Operations
-    {
-      category: 'operations',
-      icon: <Factory size={22} className="text-margix-yellow" />,
+      category: 'software',
+      icon: <Factory size={18} className="text-[#FF7D44]" />,
       title: "Manufacturing MRP & Production Planning",
-      phase: "Phase 2",
-      badge: "Industrial Production",
-      description: "Full industrial MRP with multi-level Bills of Materials (BOM), shop-floor routing, work orders, job work outsourcing tracking, scrap accounting, and automated raw material replenishment."
+      phase: "Q2 2027",
+      badge: "Software Suite",
+      description: "Multi-level Bills of Materials (BOM), shop-floor work orders, raw material consumption tracking, and scrap accounting tailored for Indian MSME factory operations."
     },
     {
-      category: 'operations',
-      icon: <Users size={22} className="text-margix-yellow" />,
-      title: "CRM (Customer Relationship Management)",
-      phase: "Phase 2",
-      badge: "Sales Growth",
-      description: "Track prospective buyers from first lead to recurring orders. Manage deal pipelines, customer interaction histories, quote follow-ups, and sales team target achievement."
-    },
-    {
-      category: 'operations',
-      icon: <Layers size={22} className="text-margix-yellow" />,
-      title: "HR & Employee Payroll Management",
-      phase: "Phase 2",
-      badge: "Workforce",
-      description: "Integrated biometric and mobile check-in attendance, shift management, leave approvals, automated salary slips, PF/ESI statutory compliance, and one-click bank disbursement files."
+      category: 'software',
+      icon: <Layers size={18} className="text-[#FF7D44]" />,
+      title: "Field Sales CRM & Dealer Network",
+      phase: "Q1 2027",
+      badge: "Software Suite",
+      description: "Field sales mobile application with geo-fenced dealer visits, instant purchase order collection, outstanding payment collections, and distributor territory mapping."
     },
 
-    // 4. Ecosystem & Fintech
+    // 2. Road Logistics
     {
-      category: 'ecosystem',
-      icon: <Network size={22} className="text-margix-yellow" />,
-      title: "Margix B2B Business Network",
-      phase: "Phase 3",
-      badge: "Connected Trade",
-      description: "Interconnect thousands of verified Indian manufacturers, distributors, and logistics partners. Discover reliable trade partners, check trust ratings, and exchange purchase orders and invoices with zero latency."
+      category: 'logistics',
+      icon: <Package size={18} className="text-[#FF7D44]" />,
+      title: "Express Parcel & Surface Courier Integration",
+      phase: "Q1 2027",
+      badge: "Logistics Service",
+      description: "Door-to-door courier booking for small cartons, spare parts, and urgent parcels through leading national carriers alongside dedicated full-truck and part-truck operations."
     },
     {
-      category: 'ecosystem',
-      icon: <Coins size={22} className="text-margix-yellow" />,
-      title: "Embedded Working Capital & Invoice Financing",
-      phase: "Phase 3",
-      badge: "Fintech Partnerships",
-      description: "Instant invoice discounting and freight advances provided via RBI-regulated banking and NBFC partners directly inside Margix. Accelerate cash flow based on verified ledger transactions (Margix facilitates, does not lend)."
+      category: 'logistics',
+      icon: <Truck size={18} className="text-[#FF7D44]" />,
+      title: "Fractional Truck-Space Spot Auctions",
+      phase: "Q2 2027",
+      badge: "Logistics Service",
+      description: "Real-time spot auctions for fractional unutilized truck volume. Transporters with partially filled trailers can auction leftover capacity to nearby shippers along active transit lanes."
     },
     {
-      category: 'ecosystem',
-      icon: <Wrench size={22} className="text-margix-yellow" />,
-      title: "Post-Sales Service & Warranty Tracking",
-      phase: "Phase 3",
-      badge: "After-Sales Lifecycle",
-      description: "Lifecycle tracking for machines, appliances, and industrial assets. Manage annual maintenance contracts (AMC), schedule field technician visits, and track customer replacement parts."
+      category: 'logistics',
+      icon: <ShieldCheck size={18} className="text-[#FF7D44]" />,
+      title: "Standardized Transit Insurance & Claims",
+      phase: "Q1 2027",
+      badge: "Logistics Service",
+      description: "Single-click transit insurance booking per consignment with standardized digital dispute filing, geotagged incident photos, and fast-track carrier arbitration."
     },
     {
-      category: 'ecosystem',
-      icon: <Truck size={22} className="text-margix-yellow" />,
-      title: "Equipment & Vehicle Rental Management",
-      phase: "Phase 3",
-      badge: "Asset Leasing",
-      description: "Built for equipment rental providers and specialized fleet leasing. Log operating hours, track equipment location via IoT, manage return condition reports, and automate recurring rental invoices."
+      category: 'logistics',
+      icon: <Wrench size={18} className="text-[#FF7D44]" />,
+      title: "Warehouse Yard & Dock Door Scheduling",
+      phase: "Q3 2027",
+      badge: "Logistics Service",
+      description: "Dock door appointment booking for large manufacturing depots and 3PL hubs to eliminate truck detention queues, driver idling, and gate congestion."
+    },
+
+    // 3. B2B Trade & Financing
+    {
+      category: 'fintech',
+      icon: <Coins size={18} className="text-[#FF7D44]" />,
+      title: "Working Capital Invoice Discounting",
+      phase: "Q2 2027",
+      badge: "Trade Financing",
+      description: "Institutional credit lines against verified GST invoices and delivery PODs. Access up to 80% immediate cash advances through RBI-licensed banking partners."
     },
     {
-      category: 'ecosystem',
-      icon: <Globe size={22} className="text-margix-yellow" />,
-      title: "Dealer & Franchise Self-Service Portals",
-      phase: "Phase 3",
-      badge: "Channel Portals",
-      description: "White-labeled, mobile-friendly web portals where authorized dealers and stockists can independently check inventory availability, download tax invoices, view ledger statements, and submit bulk orders."
+      category: 'fintech',
+      icon: <Network size={18} className="text-[#FF7D44]" />,
+      title: "Direct B2B Commerce Network",
+      phase: "Q3 2027",
+      badge: "Trade Network",
+      description: "Connect verified manufacturers, distributors, and bulk raw material suppliers on a shared directory with verified GSTIN profiles, trade ratings, and standardized terms."
     },
     {
-      category: 'ecosystem',
-      icon: <BarChart size={22} className="text-margix-yellow" />,
-      title: "Anonymized Industry Efficiency Benchmarks",
-      phase: "Phase 3",
+      category: 'fintech',
+      icon: <BarChart size={18} className="text-[#FF7D44]" />,
+      title: "Interstate Lane & Commodity Benchmarks",
+      phase: "Q2 2027",
       badge: "Market Intelligence",
-      description: "Benchmark your freight costs per ton-kilometer, inventory turnaround days, and debtor collection periods against real, anonymized industry peers across India."
+      description: "Aggregated, anonymized rate intelligence across major Indian freight corridors (e.g. Mumbai-Delhi, Pune-Ahmedabad) and wholesale trade pricing trends."
     },
     {
-      category: 'ecosystem',
-      icon: <Code2 size={22} className="text-margix-yellow" />,
-      title: "Open API Marketplace & Developer SDKs",
-      phase: "Phase 3",
-      badge: "Extensible Platform",
-      description: "Enterprise REST & GraphQL APIs, webhooks, and SDKs. Seamlessly integrate Margix with legacy ERPs (SAP, Oracle), custom IoT GPS trackers, and proprietary warehouse hardware."
+      category: 'fintech',
+      icon: <Code2 size={18} className="text-[#FF7D44]" />,
+      title: "Enterprise Open REST APIs & Webhooks",
+      phase: "Q1 2027",
+      badge: "Developer Platform",
+      description: "Comprehensive REST APIs and event webhooks for enterprise ERP integration (SAP, Oracle, custom systems), enabling automated consignment sync and inventory feeds."
     }
   ];
 
-  const filteredSolutions = selectedCategory === 'all' 
-    ? solutions 
+  const filteredSolutions = selectedCategory === 'all'
+    ? solutions
     : solutions.filter(s => s.category === selectedCategory);
 
   return (
-    <section id="future-solutions" className="py-20 lg:py-28 bg-margix-black text-white relative overflow-hidden border-b border-neutral-800">
-      
-      {/* Background radial glow */}
-      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-margix-yellow/5 rounded-full blur-[140px] pointer-events-none" />
+        <section id="roadmap" className="py-20 lg:py-24 bg-white text-neutral-900 border-b border-neutral-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 lg:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-margix-yellow/10 border border-margix-yellow/30 text-margix-yellow text-xs font-bold uppercase tracking-wider mb-4">
-            <Sparkles size={14} className="fill-margix-yellow" />
-            Product Horizon &bull; Margix Pvt Ltd
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
-            All Upcoming Solutions & Products <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-margix-yellow to-amber-400">
-              We Are Delivering
-            </span>
-          </h2>
-          <p className="text-neutral-400 text-base sm:text-lg leading-relaxed">
-            Margix Pvt Ltd is built on an extensible, modular micro-kernel. Beyond our 15 Day-One apps, here is the complete spectrum of advanced solutions rolling out for Indian businesses.
-          </p>
-        </div>
+                {/* Section Header */}
+                <div className="text-center max-w-3xl mx-auto mb-12">
+                  <span className="inline-block px-3 py-1 rounded-md bg-orange-50 border border-orange-200 text-orange-900 text-xs font-bold uppercase tracking-wider mb-3">
+                    Product Roadmap
+                  </span>
+                  <h2 className="text-3xl sm:text-4xl font-black text-neutral-900 tracking-tight mb-4">
+                    Expanding Capabilities for Commerce & Logistics
+                  </h2>
+                    <p className="text-neutral-600 text-base leading-relaxed">
+                      Our active development roadmap extends our commercial software suite and logistics network to support complex manufacturing, retail channels, and trade financing.
+                    </p>
+                </div>
 
-        {/* Category Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((cat) => {
-            const isActive = selectedCategory === cat.id;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id as any)}
-                className={`px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer ${
-                  isActive
-                    ? 'bg-margix-yellow text-margix-black shadow-lg shadow-yellow-500/20'
-                    : 'bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-850'
-                }`}
-              >
-                {cat.label}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Solutions Grid */}
-        <motion.div 
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14"
-        >
-          <AnimatePresence>
-            {filteredSolutions.map((item, idx) => (
-              <motion.div
-                layout
-                key={item.title}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.25, delay: idx * 0.02 }}
-                className="p-6 sm:p-7 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-margix-yellow/60 transition-all duration-300 flex flex-col justify-between group hover:shadow-xl hover:shadow-yellow-500/5"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 group-hover:scale-105 transition-transform">
-                      {item.icon}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-neutral-850 text-neutral-300 border border-neutral-750">
-                        {item.phase}
-                      </span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-margix-yellow/10 text-margix-yellow border border-margix-yellow/30">
-                        {item.badge}
-                      </span>
-                    </div>
+                  {/* Category Filters */}
+                  <div className="flex flex-wrap justify-center gap-2 mb-10">
+                    {categories.map(cat => (
+                      <button
+                        key={cat.id}
+                        onClick={() => setSelectedCategory(cat.id as any)}
+                        className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer border ${selectedCategory === cat.id
+                            ? 'bg-[#0f172a] text-white border-neutral-900 shadow-sm'
+                            : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
+                          }`}
+                      >
+                        {cat.label}
+                      </button>
+                    ))}
                   </div>
 
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-margix-yellow transition-colors leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed mb-4">
-                    {item.description}
-                  </p>
-                </div>
+                  {/* Solutions Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                      <AnimatePresence>
+                          {
+                            filteredSolutions.map((sol, idx) => (
+                              <motion.div
+                                key={sol.title}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.15, delay: idx * 0.03 }}
+                                className="rounded-xl border border-neutral-200 bg-neutral-50/60 p-6 flex flex-col justify-between hover:border-neutral-300 hover:bg-white transition-all shadow-sm"
+                              >
+                                <div>
+                                      <div className="flex items-center justify-between gap-2 mb-4">
+                                        <div className="p-2 rounded-lg bg-orange-50 border border-orange-200">
+                                          {sol.icon}
+                                        </div>
+                                          <div className="flex items-center gap-1.5 text-xs text-neutral-500 font-medium">
+                                            <Clock size={12} className="text-[#FF7D44]" />
+                                            <span>{sol.phase}</span>
+                                          </div>
+                                        </div>
 
-                <div className="pt-4 border-t border-neutral-850 flex items-center justify-between text-xs text-neutral-500">
-                  <span className="flex items-center gap-1.5 text-neutral-400">
-                    <CheckCircle2 size={13} className="text-margix-yellow" />
-                    Product Scope
-                  </span>
-                  <span className="text-[11px] font-semibold text-neutral-400">Margix Pvt Ltd</span>
-                </div>
-              </motion.div>
+                                          <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF7D44] block mb-1">
+                                            {sol.badge}
+                                          </span>
+                                          <h4 className="text-base font-bold text-neutral-900 mb-2 leading-snug">
+                                            {sol.title}
+                                          </h4>
+                                          <p className="text-xs text-neutral-600 leading-relaxed">
+                                            {sol.description}
+                                          </p>
+                                      </div>
+                                    </motion.div>
             ))}
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Bottom Banner */}
-        <div className="rounded-3xl bg-neutral-950 border border-neutral-800 p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-          <div>
-            <span className="text-xs font-bold text-margix-yellow uppercase tracking-widest block mb-1">
-              Have Specific Enterprise or Custom Requirements?
-            </span>
-            <h4 className="text-xl sm:text-2xl font-bold text-white">
-              Partner with Margix Pvt Ltd for Your Digital Transformation
-            </h4>
-            <p className="text-neutral-400 text-sm mt-1 max-w-2xl">
-              Whether you need POS counter hardware integration, custom ERP hooks, or early access to our AI copilot, our product engineering team works directly with our clients.
-            </p>
-          </div>
-          <button
-            onClick={onOpenContact}
-            className="shrink-0 px-8 py-3.5 rounded-xl bg-margix-yellow text-margix-black font-bold text-sm uppercase tracking-wider hover:bg-yellow-400 transition-all cursor-pointer shadow-lg shadow-yellow-500/20 flex items-center gap-2"
-          >
-            <span>Request Roadmap Briefing</span>
-            <ArrowRight size={16} />
-          </button>
+                                  </AnimatePresence>
         </div>
 
-      </div>
-    </section>
-  );
+                      {/* Consultation Callout */}
+                      <div className="rounded-xl bg-neutral-50 border border-neutral-200 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+                        <div>
+                            <h4 className="text-base font-bold text-neutral-900">
+                              Need custom integration with legacy enterprise ERPs?
+                            </h4>
+                              <p className="text-xs text-neutral-600 mt-1">
+                                We provide dedicated REST APIs and custom connectors for SAP, Oracle, and proprietary legacy databases.
+                              </p>
+                            </div>
+                            <button
+                              onClick={onOpenContact}
+                              className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#0f172a] hover:bg-[#1e293b] active:translate-y-px text-white font-semibold text-xs transition-all border border-neutral-900 shadow-sm cursor-pointer"
+                            >
+                              <span>Consult Enterprise Team</span>
+                              <ArrowRight size={14} />
+                            </button>
+                        </div>
+
+                      </div>
+                    </section>
+                    );
 }

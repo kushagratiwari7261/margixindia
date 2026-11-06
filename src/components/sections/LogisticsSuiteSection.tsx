@@ -1,285 +1,249 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Truck, 
-  Warehouse, 
-  ShieldCheck, 
-  Share2, 
-  Smartphone, 
-  CheckCircle2, 
-  ArrowRight,
+import {
+  Truck,
+  Warehouse,
+  ShieldCheck,
+  Share2,
+  Smartphone,
   Route,
-  Sparkles
+  ArrowRight,
+  Check,
+  MapPin
 } from 'lucide-react';
+import InteractiveLogisticsAnimation from '../hero/InteractiveLogisticsAnimation';
 
 interface LogisticsSuiteSectionProps {
   onOpenContact?: () => void;
 }
 
 export default function LogisticsSuiteSection({ onOpenContact }: LogisticsSuiteSectionProps) {
-  const [activeTab, setActiveTab] = useState(0);
+  const [selectedService, setSelectedService] = useState<number | null>(null);
 
-  const apps = [
+  const services = [
     {
-      id: "marketplace",
-      name: "Load Marketplace",
-      role: "Verified Freight Bidding for Transporters",
-      icon: <Route size={22} />,
-      tag: "KYC-Verified Only",
-      desc: "Connects shippers directly with verified fleet operators across India. See loads posted by nearby manufacturers and distributors, submit live bids, and secure guaranteed cargo.",
-      bullets: [
-        "Real-time broadcast of loads posted by vetted trade & manufacturing companies",
-        "Instant competitive bidding engine with clear lane pricing transparency",
-        "Strict KYC verification: Only transporters with active GST and PAN can quote",
-        "Immediate booking confirmation and direct digital consignment dispatch"
-      ],
-      metric: "Zero Broker Cuts",
-      preview: {
-        lane: "Pune &rarr; Ahmedabad · 16 MT FTL",
-        rate: "₹36,000",
-        detail: "Direct from verified manufacturer · 2 competing bids"
-      }
+      id: "ftl",
+      title: "Full Truck Load (FTL) Transportation",
+      subtitle: "Dedicated multi-axle freight with verified carriers",
+      image: "/images/ssc-ftl.png",
+      tag: "Pan-India FTL",
+      icon: <Truck size={20} className="text-[#B08D00]" />,
+      summary: "End-to-end dedicated truckload logistics across national interstate corridors with sequential digital LRs and live GPS milestone updates.",
+      points: [
+        "Dedicated multi-axle container trailer fleet allocation",
+        "Direct one-click e-way bill linking and automated consignee alerts",
+        "Diesel slips, toll receipts, and driver advance ledgers recorded per trip",
+        "Transparent lane pricing with guaranteed vehicle placement"
+      ]
     },
     {
-      id: "ftl-ops",
-      name: "Transport Operations (FTL)",
-      role: "Full Truckload Dispatch & Digital LR",
-      icon: <Truck size={22} />,
-      tag: "Full Truckload Suite",
-      desc: "Complete operational management for dedicated full truckloads. Generate sequential digital Lorry Receipts (LR), link e-way bills with one click, track driver advances, and share live trip links.",
-      bullets: [
-        "Sequential digital Lorry Receipts (LR) with custom transporter branding",
-        "Direct e-way bill linking: Sync consignor, consignee, and HSN details in 1 click",
-        "Trip expense tracking: Diesel slips, toll receipts, and driver advance ledgers",
-        "Live trip tracking link with automated milestone updates to customers"
-      ],
-      metric: "1-Click LR & E-Way",
-      preview: {
-        lane: "Digital LR #LR-8921 (MH-12-RN-9942)",
-        rate: "25 MT Taurus",
-        detail: "E-Way bill auto-synced · Driver advance ₹12,000 paid"
-      }
+      id: "ptl",
+      title: "Part Truck Load (PTL) & Parcel Network",
+      subtitle: "Branch booking, hub cross-docking & cash on delivery",
+      image: "/images/ssc-ptl.png",
+      tag: "Parcel Logistics",
+      icon: <Route size={20} className="text-[#B08D00]" />,
+      summary: "Cost-effective transportation for fractional cargo and industrial parcel consignments across networked hub godowns.",
+      points: [
+        "Local branch booking counter with bilti generation in 30 seconds",
+        "Cross-dock hub staging with volumetric weight & carton tracking",
+        "Door-delivery challans and Cash on Delivery (COD) collection logs",
+        "Automated demurrage rules and storage fee calculation"
+      ]
     },
     {
-      id: "ptl-godown",
-      name: "Branch & Godown (PTL)",
-      role: "Part-Truckload, Hubs & Cross-Docking",
-      icon: <Warehouse size={22} />,
-      tag: "Part-Truckload Network",
-      desc: "Purpose-built for Indian parcel, sundries, and PTL logistics. Manage parcel bookings at local branches, cross-dock loading, godown staging, and cash on delivery.",
-      bullets: [
-        "Branch booking counter: Generate parcel bilti/LR with multi-package weight & volume",
-        "Godown staging: Track goods unloaded into hubs and loaded onto outbound trunk routes",
-        "Last-mile delivery runs with door-delivery challans and Cash on Delivery (COD)",
-        "Demurrage and storage charge automation after specified free storage days",
-        "Inter-branch settlement ledgers reconciling freight collections across network hubs"
-      ],
-      metric: "Godown Traceability",
-      preview: {
-        lane: "Bhiwandi Hub Godown #3",
-        rate: "142 Parcels Staged",
-        detail: "COD Pending: ₹84,200 · Storage charges auto-calculated"
-      }
+      id: "warehousing",
+      title: "Warehousing & Godown Staging",
+      subtitle: "Strategic multi-city inventory depots and cross-dock hubs",
+      image: "/images/ssc-warehousing.png",
+      tag: "Godown Hubs",
+      icon: <Warehouse size={20} className="text-[#B08D00]" />,
+      summary: "Multi-godown visibility with batch-level tracking, serial numbers, and inter-branch in-transit transfers across India.",
+      points: [
+        "Bhiwandi, Pune, Gurugram, and Bengaluru transit hubs",
+        "Goods Received Notes (GRN) with barcode scanning at entry gates",
+        "FIFO stock valuation and automated low-threshold stockout alerts",
+        "Direct export of stock valuation ledgers for balance sheet reporting"
+      ]
     },
     {
-      id: "fleet",
-      name: "Fleet & Driver Compliance",
-      role: "Automatic Expiry Alerts & Dispatch Locks",
-      icon: <ShieldCheck size={22} />,
-      tag: "Proactive Compliance",
-      desc: "Eliminate roadside penalties and challans. Maintain digital records of every truck and driver with automated expiry alerts that block non-compliant vehicles from taking trips.",
-      bullets: [
-        "Vehicle records: RC, National Permit, State Permits, Fitness, Insurance, PUC",
-        "Driver compliance: Driving license verification, Aadhaar check, and medical fitness logs",
-        "Automated alerts 30, 15, and 7 days prior to document expiry",
-        "Safety compliance gate: Expired vehicles are automatically locked from dispatch"
-      ],
-      metric: "Zero Fines",
-      preview: {
-        lane: "Vehicle: NL-01-AF-4120",
-        rate: "National Permit Alert",
-        detail: "Document expired &bull; Vehicle automatically locked from new trips"
-      }
+      id: "fleet-compliance",
+      title: "Fleet & Driver Safety Compliance",
+      subtitle: "Digital document records with automated dispatch locks",
+      image: "/images/stitch-trucks-hub.png",
+      tag: "Zero Challans",
+      icon: <ShieldCheck size={20} className="text-[#B08D00]" />,
+      summary: "Maintain complete digital compliance for every vehicle and driver. Eliminate roadside fines with automatic expiry locks.",
+      points: [
+        "National Permit, State Permits, RC, Fitness, Insurance, and PUC",
+        "Driver license verification, Aadhaar check, and medical fitness logs",
+        "Automated warning alerts 30, 15, and 7 days prior to expiry",
+        "Safety compliance gate locks expired vehicles from new load assignment"
+      ]
     },
     {
       id: "3pl-pool",
-      name: "3PL Capacity Pool",
-      role: "Shared Partner Fleet & Backhaul Matching",
-      icon: <Share2 size={22} />,
-      tag: "Collaborative Logistics",
-      desc: "Logistics companies pooling resources to maximize utilization. Exchange excess capacity, book spare space in partner trucks, and eliminate empty deadhead return trips.",
-      bullets: [
-        "Partner network: Share unutilized trailer space with trusted partner operators",
-        "Automated backhaul matching: Fill return trips automatically at your destination",
-        "B2B partner rates with transparent revenue-sharing and booking rules",
-        "Consolidated partner billing with automated debit/credit reconciliations"
-      ],
-      metric: "97% Utilization",
-      preview: {
-        lane: "Bengaluru &rarr; Mumbai Return Match",
-        rate: "Deadhead Avoided: 980 km",
-        detail: "Partner pool reserved return load &bull; Net extra revenue: ₹42,000"
-      }
+      title: "3PL Capacity Pool & Return Backhauls",
+      subtitle: "Collaborative fleet sharing eliminating deadhead miles",
+      image: "/images/stitch-software-3d-truck.png",
+      tag: "97% Utilization",
+      icon: <Share2 size={20} className="text-[#B08D00]" />,
+      summary: "Partner network allowing transport operators to exchange excess capacity and secure return loads at delivery destinations.",
+      points: [
+        "Automated backhaul matching fills return trips at your destination",
+        "Shared partner trailer capacity reduces vacant deadhead miles",
+        "Pre-negotiated B2B partner rates with transparent revenue sharing",
+        "Consolidated partner billing with automated debit/credit ledgers"
+      ]
     },
     {
       id: "driver-app",
-      name: "Driver Mobile App",
-      role: "Offline-First Mobile Tool for Drivers",
-      icon: <Smartphone size={22} />,
-      tag: "Works 100% Offline",
-      desc: "A clean, simple mobile tool engineered for truck drivers. Delivers step-by-step trip instructions, captures photo proof-of-delivery (POD) and signatures, and works with no cellular network.",
-      bullets: [
-        "Step-by-step trip checkpoints: Gate entry, loading, toll crossing, and delivery arrival",
-        "Geotagged & timestamped photo Proof of Delivery (POD) with consignee signature",
-        "On-spot Cash on Delivery (COD) collection logging with instant SMS receipt",
-        "Offline-first architecture: Operates without internet; auto-syncs when 4G returns"
-      ],
-      metric: "Offline-First",
-      preview: {
-        lane: "Delivery Step 4 of 4: Completed",
-        rate: "Photo POD Uploaded",
-        detail: "Consignee OTP verified &bull; ₹18,400 COD collected &bull; Auto-synced"
-      }
+      title: "Offline-First Driver Mobile App",
+      subtitle: "Turn-by-turn checkpoints and digital photo POD",
+      image: "/images/ssc-distribution.png",
+      tag: "Works Offline",
+      icon: <Smartphone size={20} className="text-[#B08D00]" />,
+      summary: "Simple, rugged mobile tool for truck drivers that operates 100% without internet and syncs when 4G connectivity returns.",
+      points: [
+        "Step-by-step trip checkpoints: Gate in, loading, toll, gate arrival",
+        "Geotagged & timestamped photo Proof of Delivery (POD) with signature",
+        "On-spot Cash on Delivery (COD) collection receipt via instant SMS",
+        "Offline-first local cache ensures drivers are never stranded by poor signal"
+      ]
     }
   ];
 
-  const current = apps[activeTab];
-
   return (
-    <section id="logistics" className="py-20 lg:py-28 bg-margix-black text-white relative overflow-hidden border-b border-neutral-800">
-      
-      {/* Ambient background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-margix-yellow/5 rounded-full blur-[140px] pointer-events-none" />
+    <section id="logistics-services" className="py-20 lg:py-24 bg-neutral-50/70 text-neutral-900 border-b border-neutral-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 lg:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-margix-yellow/10 border border-margix-yellow/30 text-margix-yellow text-xs font-bold uppercase tracking-wider mb-4">
-            <Sparkles size={14} className="fill-margix-yellow" />
-            Product Family 2 &bull; Logistics Platform
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-xs font-bold text-neutral-900 mb-3">
+              <span className="w-2 h-2 rounded-full bg-[#B08D00]" />
+              <span>Road Freight Division</span>
+              <span className="text-neutral-400 font-normal">•</span>
+              <span className="text-[#B08D00]">Pan-India Logistics & Fleet Operations</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-neutral-900 tracking-tight mb-4">
+              Pan-India Road Freight & Fleet Operations
+            </h2>
+            <p className="text-neutral-600 text-base leading-relaxed">
+              Move full truckload shipments or manage regional parcel branch networks. Real vehicles, verified drivers, transparent lane pricing, and zero deadhead return miles.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
-            Built for Transporters: <span className="text-transparent bg-clip-text bg-gradient-to-r from-margix-yellow to-amber-400">6 Connected Logistics Apps</span>
-          </h2>
-          <p className="text-neutral-400 text-base sm:text-lg leading-relaxed">
-            From single-truck operators to national part-truckload (PTL) fleets. Take just 2 apps or deploy all 6 to eliminate deadhead miles, manage godowns, and track your fleet.
-          </p>
-        </div>
 
-        {/* Responsive App Selector Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {apps.map((app, idx) => {
-            const isActive = activeTab === idx;
-            return (
-              <button
-                key={app.id}
-                onClick={() => setActiveTab(idx)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer ${
-                  isActive
-                    ? 'bg-margix-yellow text-margix-black shadow-lg shadow-yellow-500/20'
-                    : 'bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white hover:bg-neutral-850'
-                }`}
-              >
-                <span className={isActive ? 'text-margix-black' : 'text-margix-yellow'}>
-                  {app.icon}
-                </span>
-                <span>{app.name}</span>
-              </button>
-            );
-          })}
-        </div>
+                      {/* 6 High-Impact Visual Cards Grid (Inspired by smartsupplychain.in design) */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                        {services.map((item, idx) => (
+                          <div
+                            key={item.id}
+                            className="group relative rounded-2xl border border-neutral-200 bg-white overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-amber-400 transition-all duration-300 flex flex-col justify-between cursor-pointer"
+                            onClick={() => setSelectedService(selectedService === idx ? null : idx)}
+                          >
+                            <div>
+                              {/* Image Container with Zoom Animation */}
+                              <div className="relative w-full h-48 overflow-hidden bg-neutral-100">
+                                <img
+                                  src={item.image}
+                                  alt={item.title}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                                  loading="lazy"
+                                />
+                                <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-xs px-2.5 py-1 rounded-md text-[11px] font-bold text-neutral-900 border border-neutral-200 shadow-2xs">
+                                  {item.tag}
+                                </div>
+                              </div>
 
-        {/* Active Logistics Feature Showcase Card */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.25 }}
-            className="rounded-3xl border border-neutral-800 bg-neutral-950 p-6 sm:p-10 lg:p-12 shadow-2xl"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              
-              {/* Left Column: Details */}
-              <div className="lg:col-span-7">
-                <div className="inline-block px-3 py-1 rounded-full bg-neutral-900 border border-neutral-700 text-margix-yellow text-xs font-bold uppercase tracking-wider mb-3">
-                  {current.tag}
-                </div>
-                <h3 className="text-2xl sm:text-4xl font-black text-white mb-1">
-                  {current.name}
-                </h3>
-                <p className="text-margix-yellow font-semibold text-sm sm:text-base mb-4">
-                  {current.role}
-                </p>
-                <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6">
-                  {current.desc}
-                </p>
+                              {/* Content Body */}
+                              <div className="p-6">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <div className="p-1.5 rounded-lg bg-amber-50 border border-amber-200">
+                                    {item.icon}
+                                  </div>
+                                  <span className="text-xs font-semibold text-neutral-500">{item.subtitle}</span>
+                                </div>
 
-                <div className="space-y-3 mb-8">
-                  {current.bullets.map((item, fIdx) => (
-                    <div key={fIdx} className="flex items-start gap-3">
-                      <div className="mt-1 w-5 h-5 rounded-full bg-margix-yellow/20 text-margix-yellow flex items-center justify-center shrink-0">
-                        <CheckCircle2 size={13} />
-                      </div>
-                      <span className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-                        {item}
+                                  <h3 className="text-lg font-black text-neutral-900 group-hover:text-[#B08D00] transition-colors leading-snug mb-2.5">
+                                    {item.title}
+                                  </h3>
+
+                                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-4">
+                                    {item.summary}
+                                  </p>
+
+                                  {/* Bullet points */}
+                                  <ul className="space-y-2 border-t border-neutral-100 pt-3">
+                                    {item.points.slice(0, 3).map((pt, pIdx) => (
+                                      <li key={pIdx} className="flex items-start gap-2 text-xs text-neutral-700">
+                                        <Check size={13} className="text-[#B08D00] shrink-0 mt-0.5" />
+                                        <span>{pt}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </div>
+
+                    {/* Bottom Card Action Strip */}
+                    <div className="px-6 py-4 bg-neutral-50 border-t border-neutral-100 flex items-center justify-between">
+                      <span className="text-xs font-bold text-neutral-800 group-hover:text-amber-900 transition-colors flex items-center gap-1.5">
+                        <span>Explore Workflow</span>
+                        <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-200" />
+                      </span>
+                      <span className="text-[10px] font-mono text-neutral-400 uppercase font-semibold">
+                        Pan-India Transit
                       </span>
                     </div>
-                  ))}
-                </div>
-
-                <div className="pt-6 border-t border-neutral-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <div className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
-                    Core Guarantee: <span className="text-white font-black">{current.metric}</span>
                   </div>
-                  <button
-                    onClick={onOpenContact}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-margix-yellow text-margix-black font-bold text-sm hover:bg-yellow-400 transition-all cursor-pointer shadow-md"
-                  >
-                    <span>Connect Fleet / Book Demo</span>
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
+          ))}
               </div>
 
-              {/* Right Column: Visual Preview */}
-              <div className="lg:col-span-5 bg-neutral-900 rounded-2xl border border-neutral-800 p-6 sm:p-8 flex flex-col justify-between min-h-[320px] shadow-inner">
-                <div>
-                  <div className="flex items-center justify-between pb-4 border-b border-neutral-800 mb-6">
-                    <span className="text-xs font-bold text-neutral-400 flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-margix-yellow animate-pulse"></span>
-                      MARGIX LOGISTICS PLATFORM
-                    </span>
-                    <span className="text-[11px] text-margix-yellow font-mono font-bold">LIVE NETWORK</span>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-black border border-neutral-800 space-y-2">
-                    <div className="text-xs text-neutral-400 font-bold uppercase tracking-wider">
-                      Active Execution
-                    </div>
-                    <div className="text-base sm:text-lg font-bold text-white">
-                      {current.preview.lane}
-                    </div>
-                    <div className="text-xl font-black text-margix-yellow">
-                      {current.preview.rate}
-                    </div>
-                    <p className="text-xs text-neutral-400 pt-2 border-t border-neutral-850">
-                      {current.preview.detail}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-neutral-800 text-[11px] text-neutral-500 flex items-center justify-between">
-                  <span>Margix Pvt Ltd Fleet Engine</span>
-                  <span>100% Indian Highway Routes</span>
-                </div>
-              </div>
-
+        {/* Interactive Volumetric Packing & Backhaul Simulator */ }
+              < div className = "mt-14" >
+          <div className="mb-5 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <div>
+              <span className="inline-block px-2.5 py-1 rounded-md bg-amber-50 border border-amber-200 text-[#B08D00] text-[11px] font-bold uppercase tracking-wider mb-2">
+                Live Interactive Simulator
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-neutral-900 tracking-tight">
+                Trailer Volume Packing & Return Backhaul Matching
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-600 mt-1">
+                See how Margix scans consignment lots, fills empty trailer capacity from 28% to 97%, and eliminates deadhead miles on return trips.
+              </p>
             </div>
-          </motion.div>
-        </AnimatePresence>
+            <div className="flex items-center gap-2 text-xs font-semibold text-neutral-500 shrink-0">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span>Interactive Model Active</span>
+            </div>
+          </div>
+
+          <InteractiveLogisticsAnimation />
+        </div>
+
+          {/* Action Strip */}
+          <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#B08D00] shrink-0">
+                <MapPin size={22} />
+              </div>
+              <div>
+                <h4 className="text-base font-bold text-neutral-900">
+                  Operating on 500+ Interstate Indian Highway Corridors
+                </h4>
+                <p className="text-xs text-neutral-600 mt-0.5">
+                  From Gujarat and Maharashtra industrial belts to Tamil Nadu and NCR manufacturing hubs.
+                </p>
+              </div>
+            </div>
+
+          <button
+            onClick={onOpenContact}
+            className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#08101d] hover:bg-[#112038] active:translate-y-px text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer"
+          >
+            <span>Book Freight / Dispatch Truck</span>
+            <ArrowRight size={15} />
+          </button>
+        </div>
 
       </div>
     </section>

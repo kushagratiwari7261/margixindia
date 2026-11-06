@@ -6,15 +6,37 @@
   --color-margix-black: #050505;
   --color-margix-gray: #222222;
   --color-margix-light: #f9f9f9;
-  --font-sans: "Inter", sans-serif;
+
+  /* Unified freight brand design language */
+  --color-supply-950: #00141b;
+  --color-supply-900: #002a36;
+  --color-supply-800: #003b49;
+  --color-supply-700: #00485e;
+  --color-supply-accent: #ff7d44;
+  --color-supply-accentDark: #e85d1f;
+  --color-supply-soft: #f7f7f7;
+
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+  }
+
   body {
-    background-color: var(--color-margix-light);
-    color: var(--color-margix-black);
+    background-color: var(--color-supply-soft);
+    color: var(--color-neutral-900, #171717);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: #ffc107;
+    color: #003b49;
   }
 }
 
@@ -22,13 +44,47 @@
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Hide scrollbar utility for horizontal scrollers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

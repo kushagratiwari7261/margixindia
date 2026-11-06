@@ -1,212 +1,166 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 
 interface AudienceSectionProps {
   onOpenContact?: () => void;
 }
 
 const vendorsList = [
-  { 
-    title: "Auto-Configured Industry Fields", 
-    desc: "Grade & weight for steel, size & color for garments, serial numbers for machinery, batch & expiry for food and chemicals." 
+  {
+    title: "Industry-Specific Master Fields",
+    desc: "Grade & weight for steel, size & color for garments, serial numbers for machinery, batch & expiry for food and chemical products."
   },
-  { 
-    title: "100% Replaces Tally & Spreadsheets", 
-    desc: "Complete double-entry accounting, direct e-way bills & e-invoices, and auto-compiled GSTR-1 and GSTR-3B data." 
+  {
+    title: "100% Replaces Tally & Spreadsheets",
+    desc: "Complete double-entry accounting, direct e-way bills & e-invoices, and auto-compiled GSTR-1 and GSTR-3B tax data."
   },
-  { 
-    title: "1-Click Freight from Invoices", 
-    desc: "Post loads directly from approved sales orders to verified truckers without middleman phone calls." 
+  {
+    title: "1-Click Freight Dispatch from Invoices",
+    desc: "Post loads directly from approved sales orders to verified truckers without middleman phone calls."
   },
-  { 
-    title: "Real-Time Tracking & Digital POD", 
-    desc: "Monitor consignments live, receive geotagged photo proof of delivery, and watch the freight bill auto-post to your books." 
+  {
+    title: "Real-Time Tracking & Digital Proof of Delivery",
+    desc: "Monitor consignments live, receive geotagged photo proof of delivery, and watch the freight bill auto-post to your books."
   }
 ];
 
 const fleetList = [
-  { 
-    title: "Zero Empty Miles (Backhaul Match)", 
-    desc: "AI return-trip matching and 3PL partner pooling ensure your trucks never run deadhead." 
+  {
+    title: "Zero Empty Miles (Return Backhaul Match)",
+    desc: "Collaborative partner pooling and return-trip matching ensure your trucks minimize empty deadhead return miles."
   },
-  { 
-    title: "Full Truckload (FTL) & Digital LR", 
-    desc: "Generate sequential digital Lorry Receipts with 1-click e-way bill linking and driver advance ledgers." 
+  {
+    title: "Full Truckload (FTL) & Digital LR",
+    desc: "Generate sequential digital Lorry Receipts with 1-click e-way bill linking and driver advance expense tracking."
   },
-  { 
-    title: "Part-Truckload (PTL) Branch Godowns", 
-    desc: "Manage hub parcel bookings, cross-dock loading, local delivery runs, and Cash on Delivery (COD) collection." 
+  {
+    title: "Part-Truckload (PTL) Branch Godowns",
+    desc: "Manage hub parcel bookings, cross-dock loading, local delivery runs, and Cash on Delivery (COD) collections."
   },
-  { 
-    title: "Offline Driver Mobile App", 
-    desc: "Turn-by-turn checkpoints, photo proof of delivery (POD), and digital signature — works 100% without network." 
+  {
+    title: "Offline Driver Mobile App",
+    desc: "Turn-by-turn checkpoints, photo proof of delivery (POD), and digital signature — operates 100% without cellular internet."
   }
 ];
 
 export default function AudienceSection({ onOpenContact }: AudienceSectionProps) {
-  // 'vendor', 'fleet', or 'none' (50/50 split)
-  const [hovered, setHovered] = useState<'vendor' | 'fleet' | 'none'>('none');
-  const [isDesktop, setIsDesktop] = useState(true);
-
-  useEffect(() => {
-    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
-    <section id="who-its-for" className="py-20 lg:py-28 bg-[#F7F7F8] text-neutral-900 border-b border-neutral-200 relative overflow-hidden">
-      
-      {/* Subtle background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-amber-200/20 rounded-full blur-[140px] pointer-events-none" />
+        <section id="who-its-for" className="py-20 lg:py-24 bg-neutral-50/70 text-neutral-900 border-b border-neutral-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 lg:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-neutral-200 shadow-sm text-neutral-800 text-xs font-bold uppercase tracking-wider mb-4">
-            <Sparkles size={14} className="text-amber-500 fill-amber-400" />
-            Tailored Ecosystem
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 tracking-tight mb-4">
-            Engineered for <span className="relative inline-block px-2 bg-margix-yellow text-margix-black rounded-md">Every Stakeholder</span>
-          </h2>
-          <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
-            Hover over your role to discover purpose-built workflows designed to maximize your efficiency and profitability.
-          </p>
-        </div>
-
-        {/* Dynamic Flex Accordion (Desktop) / Stacked Cards (Mobile) */}
-        <div className="flex flex-col lg:flex-row gap-6 h-auto lg:h-[620px] items-stretch">
-          
-          {/* Card 1: Vendors (Shippers, Manufacturers & Traders) */}
-          <motion.div
-            onMouseEnter={() => setHovered('vendor')}
-            onMouseLeave={() => setHovered('none')}
-            initial={false}
-            animate={{ 
-              width: isDesktop ? (hovered === 'vendor' ? '65%' : hovered === 'fleet' ? '35%' : '50%') : '100%'
-            }}
-            transition={{ type: 'spring', bounce: 0.2, duration: 0.8 }}
-            className="group relative bg-white rounded-[2.5rem] border-2 border-amber-300/60 shadow-xl overflow-hidden flex flex-col p-7 md:p-10 cursor-pointer w-full"
-          >
-            {/* Ambient internal gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-50/50 to-transparent pointer-events-none" />
-
-            <div className="relative z-10 flex flex-col h-full justify-between">
-              <div>
-                {/* Header */}
-                <div className="flex items-center gap-5 mb-6">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-white shadow-xl overflow-hidden shrink-0 bg-neutral-100">
-                    <img src="/images/audience_vendor.jpg" alt="Shippers and Manufacturers" loading="lazy" className="w-full h-full object-cover" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-black uppercase tracking-widest text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200 block w-max mb-1.5">
-                      Manufacturers & Shippers
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-black text-neutral-900">
-                      For Shippers & Traders
-                    </h3>
-                  </div>
+            {/* Section Header */}
+                <div className="text-center max-w-3xl mx-auto mb-14">
+                  <span className="inline-block px-3 py-1 rounded-md bg-orange-50 border border-orange-200 text-orange-900 text-xs font-bold uppercase tracking-wider mb-3">
+                    Target Audiences
+                  </span>
+                  <h2 className="text-3xl sm:text-4xl font-black text-neutral-900 tracking-tight mb-4">
+                    Engineered for Both Sides of Indian Commerce
+                  </h2>
+                    <p className="text-neutral-600 text-base leading-relaxed">
+                      Whether you manufacture goods or transport them by truck, Margix provides tailored workflows built to eliminate administrative friction and maximize margins.
+                    </p>
                 </div>
 
-                {/* Collapsible Content */}
-                <div className="overflow-hidden">
-                  <div className="space-y-4">
-                    {vendorsList.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-3.5">
-                        <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center">
-                          <CheckCircle2 size={13} className="text-amber-800" />
-                        </div>
-                        <div>
-                          <h4 className="text-sm sm:text-base font-bold text-neutral-900 leading-snug">{item.title}</h4>
-                          <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed mt-0.5">{item.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+                  {/* 2 Symmetrical Light Cards */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
 
-              {/* CTA Button */}
-              <div className="pt-6">
-                <button
-                  onClick={onOpenContact}
-                  className="inline-flex items-center justify-center gap-2 py-3.5 px-7 rounded-xl bg-margix-yellow text-margix-black font-bold text-sm hover:bg-yellow-400 shadow-lg shadow-yellow-500/20 transition-all cursor-pointer"
-                >
-                  <span>Optimize Your Operations</span>
-                  <ArrowRight size={16} />
-                </button>
-              </div>
-            </div>
-          </motion.div>
+                            {/* Card 1: For Shippers & Traders */}
+                            <div className="rounded-2xl bg-white border border-neutral-200 p-7 sm:p-9 shadow-sm flex flex-col justify-between">
+                              <div>
+                                <div className="flex items-center gap-4 mb-6 pb-5 border-b border-neutral-100">
+                                  <div className="w-14 h-14 rounded-xl border border-neutral-200 overflow-hidden shrink-0 bg-neutral-100">
+                                    <img
+                                      src="/images/audience_vendor.jpg"
+                                      alt="Shippers and Manufacturers"
+                                      loading="lazy"
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                    <div>
+                                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF7D44] bg-orange-50 px-2 py-0.5 rounded border border-orange-200 block w-max mb-1">
+                                        Software Products
+                                      </span>
+                                      <h3 className="text-xl font-bold text-neutral-900">
+                                        For Shippers, Manufacturers & Traders
+                                      </h3>
+                                    </div>
+                                  </div>
 
-          {/* Card 2: Fleet Owners (Transporters & Carriers) */}
-          <motion.div
-            onMouseEnter={() => setHovered('fleet')}
-            onMouseLeave={() => setHovered('none')}
-            initial={false}
-            animate={{ 
-              width: isDesktop ? (hovered === 'fleet' ? '65%' : hovered === 'vendor' ? '35%' : '50%') : '100%'
-            }}
-            transition={{ type: 'spring', bounce: 0.2, duration: 0.8 }}
-            className="group relative bg-margix-black rounded-[2.5rem] border-2 border-neutral-800 shadow-2xl overflow-hidden flex flex-col p-7 md:p-10 cursor-pointer w-full"
-          >
-            {/* Ambient internal gradient */}
-            <div className="absolute inset-0 bg-gradient-to-tl from-white/5 to-transparent pointer-events-none" />
+                                    <div className="space-y-4">
+                                      {vendorsList.map((item, idx) => (
+                                        <div key={idx} className="flex items-start gap-3">
+                                          <div className="mt-1 w-4 h-4 rounded-full bg-orange-100 text-[#FF7D44] flex items-center justify-center shrink-0">
+                                            <Check size={11} strokeWidth={3} />
+                                          </div>
+                                          <div>
+                                            <h4 className="text-sm font-bold text-neutral-900 leading-snug">{item.title}</h4>
+                                            <p className="text-neutral-600 text-xs leading-relaxed mt-0.5">{item.desc}</p>
+                                          </div>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
 
-            <div className="relative z-10 flex flex-col h-full justify-between">
-              <div>
-                {/* Header */}
-                <div className="flex items-center gap-5 mb-6">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-neutral-800 shadow-2xl overflow-hidden shrink-0 bg-neutral-900">
-                    <img src="/images/audience_fleet.jpg" alt="Fleet Owners and Transporters" loading="lazy" className="w-full h-full object-cover" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-black uppercase tracking-widest text-margix-yellow bg-white/5 px-3 py-1 rounded-full border border-white/10 block w-max mb-1.5">
-                      Transporters & Carriers
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-black text-white">
-                      For Fleet Owners
-                    </h3>
-                  </div>
-                </div>
+                                  <div className="pt-8 border-t border-neutral-100 mt-8">
+                                    <button
+                                      onClick={onOpenContact}
+                                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#0f172a] hover:bg-[#1e293b] active:translate-y-px text-white font-semibold text-xs transition-all border border-neutral-900 shadow-sm cursor-pointer"
+                                    >
+                                      <span>Demo for Shippers & Traders</span>
+                                      <ArrowRight size={14} />
+                                    </button>
+                                  </div>
+                              </div>
 
-                {/* Collapsible Content */}
-                <div className="overflow-hidden">
-                  <div className="space-y-4">
-                    {fleetList.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-3.5">
-                        <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-margix-yellow/20 flex items-center justify-center">
-                          <CheckCircle2 size={13} className="text-margix-yellow" />
-                        </div>
-                        <div>
-                          <h4 className="text-sm sm:text-base font-bold text-white leading-snug">{item.title}</h4>
-                          <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed mt-0.5">{item.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+                                    {/* Card 2: For Fleet Owners & Transporters */}
+                                    <div className="rounded-2xl bg-white border border-neutral-200 p-7 sm:p-9 shadow-sm flex flex-col justify-between">
+                                      <div>
+                                        <div className="flex items-center gap-4 mb-6 pb-5 border-b border-neutral-100">
+                                          <div className="w-14 h-14 rounded-xl border border-neutral-200 overflow-hidden shrink-0 bg-neutral-100">
+                                            <img
+                                              src="/images/audience_fleet.jpg"
+                                              alt="Fleet Owners and Transporters"
+                                              loading="lazy"
+                                              className="w-full h-full object-cover"
+                                            />
+                                          </div>
+                                            <div>
+                                              <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF7D44] bg-orange-50 px-2 py-0.5 rounded border border-orange-200 block w-max mb-1">
+                                                Logistics Services
+                                              </span>
+                                              <h3 className="text-xl font-bold text-neutral-900">
+                                                For Fleet Owners & Transporters
+                                              </h3>
+                                            </div>
+                                          </div>
 
-              {/* CTA Button */}
-              <div className="pt-6">
-                <button
-                  onClick={onOpenContact}
-                  className="inline-flex items-center justify-center gap-2 py-3.5 px-7 rounded-xl bg-white text-margix-black font-bold text-sm hover:bg-neutral-200 shadow-xl transition-all cursor-pointer"
-                >
-                  <span>Onboard Your Fleet</span>
-                  <ArrowRight size={16} />
-                </button>
-              </div>
-            </div>
-          </motion.div>
+                                            <div className="space-y-4">
+                                              {fleetList.map((item, idx) => (
+                                                <div key={idx} className="flex items-start gap-3">
+                                                  <div className="mt-1 w-4 h-4 rounded-full bg-orange-100 text-[#FF7D44] flex items-center justify-center shrink-0">
+                                                    <Check size={11} strokeWidth={3} />
+                                                  </div>
+                                                  <div>
+                                                    <h4 className="text-sm font-bold text-neutral-900 leading-snug">{item.title}</h4>
+                                                    <p className="text-neutral-600 text-xs leading-relaxed mt-0.5">{item.desc}</p>
+                                                  </div>
+                                                </div>
+                                              ))}
+                                            </div>
+                                          </div>
 
-        </div>
-      </div>
-    </section>
-  );
+                                        <div className="pt-8 border-t border-neutral-100 mt-8">
+                                          <button
+                                            onClick={onOpenContact}
+                                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#0f172a] hover:bg-[#1e293b] active:translate-y-px text-white font-semibold text-xs transition-all border border-neutral-900 shadow-sm cursor-pointer"
+                                          >
+                                            <span>Onboard Your Fleet</span>
+                                            <ArrowRight size={14} />
+                                          </button>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </section>
+                                );
 }

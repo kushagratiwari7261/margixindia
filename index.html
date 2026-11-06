@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <meta name="description" content="Margix Pvt Ltd is one online platform where Indian businesses run their daily work (billing, stock, purchases, accounts, GST) and move goods by truck, without Tally or disconnected software. 15 modular day-one apps." />
     
     <!-- OpenGraph / Social Meta Tags -->
@@ -34,7 +34,8 @@
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer service",
-        "email": "contact@margixindia.com"
+        "email": "contact@margixindia.com",
+        "areaServed": ["New Delhi", "Mumbai", "IN"]
       }
     }
     </script>
@@ -71,6 +72,66 @@
         }
       ]
     }
+    </script>
+  
+    <!-- Situ Design Auth Wrapper -->
+    <script>
+      (function(){
+        try {
+          window.__SITU_ENFORCE_JWT = true;
+          window.__SITU_BACKEND_URL = 'https://situ-design-backend-qt3kmin7pq-uc.a.run.app';
+          var __situRealInstaller = null;
+          if (!Object.getOwnPropertyDescriptor(window, 'installReactClickInspector') || Object.getOwnPropertyDescriptor(window, 'installReactClickInspector').configurable) {
+            Object.defineProperty(window, 'installReactClickInspector', {
+              configurable: true,
+              enumerable: true,
+              get: function() {
+                return async function(){
+                  if (typeof __situRealInstaller === 'function') return __situRealInstaller.apply(window, arguments);
+                };
+              },
+              set: function(v) { __situRealInstaller = v; }
+            });
+          }
+        } catch(_) {}
+      })();
+    </script>
+
+    <!-- Situ Design Attestation Token Loader -->
+    <script>
+      (function(){
+        try {
+          fetch('http://127.0.0.1:7127/situ-attestation.js', { cache: 'no-store' })
+            .then(r => r.ok ? r.text() : null)
+            .then(code => { if (code) eval(code); })
+            .catch(() => {});
+        } catch(_) {}
+      })();
+    </script>
+
+    <!-- Situ Design Inspector (development only) -->
+    <script defer src="/plugins/situ-design/situImport.bundle.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        if (typeof window.installReactClickInspector === 'function') {
+          window.installReactClickInspector();
+        }
+      });
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        if (typeof window.installReactClickInspector === 'function') {
+          window.installReactClickInspector();
+        }
+      }
+      let authCheckInterval = setInterval(() => {
+        if (window.__SITU_ATTESTED === true 
+            && typeof window.installReactClickInspector === 'function' 
+            && !window.__reactClickInspectorInstalled) {
+          window.installReactClickInspector();
+        }
+      }, 2000);
+      setTimeout(() => {
+        clearInterval(authCheckInterval);
+      }, 300000);
     </script>
   </head>
   <body>

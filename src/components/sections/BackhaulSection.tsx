@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function BackhaulSection() {
   const [isMuted, setIsMuted] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false); // Changed to false: no autoplay
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isEnded, setIsEnded] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState('0:00');
@@ -44,7 +44,6 @@ export default function BackhaulSection() {
     }
   }, [isPlaying, isEnded]);
 
-  // Spacebar to toggle play/pause
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === 'Space' && e.target === document.body) {
@@ -56,7 +55,6 @@ export default function BackhaulSection() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [togglePlay]);
 
-  // Track video progress
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -88,127 +86,120 @@ export default function BackhaulSection() {
   }, [isDragging]);
 
   return (
-    <section id="backhauling" className="py-24 bg-white overflow-hidden border-t border-neutral-100">
-      {/* Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-12">
-        <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-margix-yellow/10 border border-margix-yellow/30 text-amber-800 text-xs font-bold uppercase tracking-wider mb-6">
-            <ArrowRightLeft size={14} className="text-amber-600" />
-            The Backhaul Advantage
-          </div>
-          <h2 className="text-3xl md:text-5xl font-black text-neutral-900 tracking-tight mb-4 lg:mb-6">
-            Never Drive Empty Again
-          </h2>
-          <p className="text-base lg:text-lg text-neutral-600 leading-relaxed max-w-2xl mx-auto">
-            Margix AI eliminates deadhead by automatically securing return shipments
-            at your destination — turning every return trip into revenue.
-          </p>
-        </div>
-      </div>
-
-      {/* Video Canvas */}
-      <motion.div 
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"
-      >
-        <div className="relative w-full rounded-xl md:rounded-3xl border-2 md:border-4 border-white shadow-xl md:shadow-2xl overflow-hidden bg-neutral-900 group">
-          <video 
-            ref={videoRef}
-            src="/assets/backhaul-video.mp4"
-            muted={isMuted}
-            playsInline
-            preload="none"
-            poster="/assets/backhaul.png"
-            className="w-full h-auto object-cover"
-          />
-          
-          {/* Invisible overlay to reliably handle clicks on mobile */}
-          <div className="absolute inset-0 z-10 cursor-pointer" onClick={togglePlay} />
-
-          {/* Big Center Play/Pause or Replay indicator */}
-          {(!isPlaying || isEnded) && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20 z-20 cursor-pointer" onClick={togglePlay}>
-              <div className="p-4 md:p-6 bg-black/50 backdrop-blur-md rounded-full text-white shadow-2xl transition-transform transform hover:scale-110">
-                {isEnded ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 md:w-12 md:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><polygon points="10 8 16 12 10 16" fill="currentColor"/></svg>
-                ) : (
-                  <Play className="w-8 h-8 md:w-12 md:h-12 ml-1 md:ml-2" fill="currentColor" />
-                )}
+      <section id="backhauling" className="py-20 lg:py-24 bg-white overflow-hidden border-b border-neutral-200">
+        {/* Header */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-10">
+            <div className="text-center max-w-3xl mx-auto">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-orange-50 border border-orange-200 text-orange-900 text-xs font-bold uppercase tracking-wider mb-3">
+                  <ArrowRightLeft size={13} className="text-[#FF7D44]" />
+                  Return Trip Optimization
+                </div>
+                  <h2 className="text-3xl sm:text-4xl font-black text-neutral-900 tracking-tight mb-4">
+                    Eliminating Empty Deadhead Return Miles
+                  </h2>
+                    <p className="text-base text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+                      Margix matches return freight at your truck's delivery destination through collaborative 3PL capacity pooling — turning empty highway miles into verified revenue.
+                    </p>
+                  </div>
               </div>
-              {isEnded && <p className="absolute bottom-[30%] text-white/80 text-sm font-bold">Click to Replay</p>}
-            </div>
+
+              {/* Video Canvas */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"
+              >
+                  <div className="relative w-full rounded-2xl border border-neutral-200 shadow-sm overflow-hidden bg-neutral-900 group">
+                    <video
+                      ref={videoRef}
+                      src="/assets/backhaul-video.mp4"
+                      muted={isMuted}
+                      playsInline
+                      preload="none"
+                      poster="/assets/backhaul.png"
+                      className="w-full h-auto object-cover"
+                    />
+
+                    <div className="absolute inset-0 z-10 cursor-pointer" onClick={togglePlay} />
+
+                    {(!isPlaying || isEnded) && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/30 z-20 cursor-pointer" onClick={togglePlay}>
+                            <div className="p-4 md:p-5 bg-white/90 backdrop-blur-sm rounded-full text-neutral-900 shadow-lg transition-transform transform hover:scale-105">
+                              {isEnded ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><polygon points="10 8 16 12 10 16" fill="currentColor"/></svg>
+                              ) : (
+                  <Play className="w-8 h-8 ml-1" fill="currentColor" />
+                              )}
+                            </div>
+                            {isEnded && <p className="absolute bottom-[28%] text-white text-xs font-semibold">Click to Replay Demonstration</p>}
+                          </div>
           )}
 
-          {/* Bottom Controls Bar */}
-          <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent pt-8 pb-3 px-3 sm:pt-10 sm:pb-4 sm:px-5 transition-opacity duration-300 z-30 ${!isPlaying ? 'opacity-100' : 'opacity-100 lg:opacity-0 lg:group-hover:opacity-100'}`}>
-            {/* Custom Progress Bar with Large Hit Area */}
-            <div 
-              className="w-full h-6 flex items-center cursor-pointer mb-1 group/bar"
-              onMouseDown={(e) => {
-                setIsDragging(true);
-                const bar = e.currentTarget;
-                const updateProgress = (clientX: number) => {
-                  const rect = bar.getBoundingClientRect();
-                  const p = Math.max(0, Math.min((clientX - rect.left) / rect.width, 1));
-                  setProgress(p * 100);
-                  if (videoRef.current && videoRef.current.duration) {
-                    videoRef.current.currentTime = p * videoRef.current.duration;
-                    setCurrentTime(formatTime(videoRef.current.currentTime));
-                  }
-                };
-                updateProgress(e.clientX);
+                          {/* Bottom Controls Bar */}
+                            <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent pt-8 pb-3 px-4 transition-opacity duration-200 z-30 ${!isPlaying ? 'opacity-100' : 'opacity-100 lg:opacity-0 lg:group-hover:opacity-100'}`}>
+                              <div
+                                className="w-full h-5 flex items-center cursor-pointer mb-1 group/bar"
+                                onMouseDown={(e) => {
+                                  setIsDragging(true);
+                                  const bar = e.currentTarget;
+                                  const updateProgress = (clientX: number) => {
+                                    const rect = bar.getBoundingClientRect();
+                                    const p = Math.max(0, Math.min((clientX - rect.left) / rect.width, 1));
+                                    setProgress(p * 100);
+                                    if (videoRef.current && videoRef.current.duration) {
+                                      videoRef.current.currentTime = p * videoRef.current.duration;
+                                      setCurrentTime(formatTime(videoRef.current.currentTime));
+                                    }
+                                  };
+                                  updateProgress(e.clientX);
 
-                const handleMouseMove = (moveEvent: MouseEvent) => updateProgress(moveEvent.clientX);
-                const handleMouseUp = () => {
-                  setIsDragging(false);
-                  window.removeEventListener('mousemove', handleMouseMove);
-                  window.removeEventListener('mouseup', handleMouseUp);
-                };
-                window.addEventListener('mousemove', handleMouseMove);
-                window.addEventListener('mouseup', handleMouseUp);
-              }}
-            >
-              <div className="w-full h-1.5 bg-white/20 rounded-full relative transition-all group-hover/bar:h-2.5">
-                <div 
-                  className="absolute top-0 left-0 h-full bg-margix-yellow rounded-full pointer-events-none"
-                  style={{ width: `${progress}%` }}
-                >
-                  <div className="absolute right-0 translate-x-1/2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-lg scale-0 group-hover/bar:scale-100 transition-transform" />
-                </div>
-              </div>
-            </div>
+                                  const handleMouseMove = (moveEvent: MouseEvent) => updateProgress(moveEvent.clientX);
+                                  const handleMouseUp = () => {
+                                    setIsDragging(false);
+                                    window.removeEventListener('mousemove', handleMouseMove);
+                                    window.removeEventListener('mouseup', handleMouseUp);
+                                  };
+                                  window.addEventListener('mousemove', handleMouseMove);
+                                  window.addEventListener('mouseup', handleMouseUp);
+                                }}
+                              >
+                                  <div className="w-full h-1 bg-white/30 rounded-full relative transition-all group-hover/bar:h-2">
+                                    <div
+                                      className="absolute top-0 left-0 h-full bg-[#fdc101] rounded-full pointer-events-none"
+                                      style={{ width: `${progress}%` }}
+                />
+                                  </div>
+                                </div>
 
-            {/* Controls Row */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <button 
-                  onClick={togglePlay}
-                  className="p-2 hover:bg-white/10 rounded-full text-white transition-all"
-                  title={isPlaying ? "Pause (Space)" : "Play (Space)"}
-                >
-                  {isPlaying ? <Pause size={22} fill="currentColor" /> : <Play size={22} fill="currentColor" />}
-                </button>
-                <button 
-                  onClick={toggleMute}
-                  className="p-2 hover:bg-white/10 rounded-full text-white transition-all"
-                  title={isMuted ? "Unmute" : "Mute"}
-                >
-                  {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-                </button>
-                <span className="text-white/70 text-xs font-mono ml-1 w-20">
-                  {currentTime} / {duration}
-                </span>
-              </div>
-              <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest hidden sm:block">
-                Press Space to {isPlaying ? 'Pause' : 'Play'}
-              </span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </section>
-  );
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-3">
+                                    <button
+                                      onClick={togglePlay}
+                                      className="p-1.5 hover:bg-white/10 rounded-md text-white transition-all cursor-pointer"
+                                      title={isPlaying ? "Pause" : "Play"}
+                                    >
+                                      {isPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" />}
+                                    </button>
+                                    <button
+                                      onClick={toggleMute}
+                                      className="p-1.5 hover:bg-white/10 rounded-md text-white transition-all cursor-pointer"
+                                      title={isMuted ? "Unmute" : "Mute"}
+                                    >
+                                      {isMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
+                                    </button>
+                                      <span className="text-white/80 text-xs font-mono">
+                                        {currentTime} / {duration}
+                                      </span>
+                                  </div>
+                                    <span className="text-white/60 text-[10px] uppercase tracking-wider hidden sm:block">
+                                      Press Space to {isPlaying ? 'Pause' : 'Play'}
+                                    </span>
+                                </div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        </section>
+                        );
 }

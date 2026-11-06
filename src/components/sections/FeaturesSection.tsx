@@ -50,7 +50,7 @@ export default function FeaturesSection() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-black tracking-tight mb-6"
           >
-            Capabilities that <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-yellow-400">Move Freight</span>
+            Capabilities that <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7D44] to-yellow-400">Move Freight</span>
           </motion.h2>
         </div>
 
@@ -66,7 +66,7 @@ export default function FeaturesSection() {
                   Maximize every cubic inch. Our 3D spatial algorithms simulate and pack trailers to 98% efficiency before a single box is loaded.
                 </p>
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 rounded-lg border border-amber-100 text-amber-800 font-bold text-sm">
-                  <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-[#FF7D44] animate-pulse" />
                   Live Payload Density: 98.4%
                 </div>
               </div>
