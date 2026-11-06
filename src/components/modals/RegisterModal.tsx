@@ -213,8 +213,8 @@ export default function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                         type="submit"
                         disabled={!isValid}
                         className={`w-full py-3.5 rounded-xl text-sm font-bold tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer ${isValid
-                            ? 'bg-neutral-950 text-white hover:bg-black shadow-md'
-                            : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
+                          ? 'bg-neutral-950 text-white hover:bg-black shadow-md'
+                          : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
                           }`}
                       >
                         <span>Reserve Early Access</span>
