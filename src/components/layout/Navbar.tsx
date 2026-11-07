@@ -187,7 +187,7 @@ export default function Navbar({ activeView, onNavigate, onOpenContact }: Navbar
                 onClick={onOpenContact}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0f172a] hover:bg-[#1e293b] active:translate-y-px text-white text-xs font-bold transition-all border border-[#D4A800]/40 shadow-sm cursor-pointer"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#F9CA24] animate-pulse" />
+                
                 <span>Apply / Demo</span>
                 <ArrowRight size={14} className="text-[#F9CA24]" />
               </button>
@@ -199,7 +199,7 @@ export default function Navbar({ activeView, onNavigate, onOpenContact }: Navbar
                 onClick={onOpenContact}
                 className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#0f172a] text-white text-xs font-bold border border-[#D4A800]/50 shadow-sm active:scale-95 transition-all cursor-pointer"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#F9CA24] animate-pulse" />
+                
                 <span>Apply</span>
               </button>
               <button

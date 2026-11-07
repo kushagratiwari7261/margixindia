@@ -298,7 +298,7 @@ export default function LogisticsHero({ onOpenContact }: LogisticsHeroProps) {
                         </div>
                         <div className="sm:text-right">
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-[#B08D00] border border-amber-200">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#B08D00] animate-pulse" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#B08D00]" />
                             {trackingResult.status}
                           </span>
                         </div>

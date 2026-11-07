@@ -18,13 +18,13 @@ const modules = [
     ],
   },
   {
-    id: 'ai',
-    name: 'AI Copilot & Call Assistant',
-    line: 'Voice calls and workflow automation.',
+    id: 'automation',
+    name: 'Automated Operations & Workflows',
+    line: 'Direct follow-ups and automated daily tasks.',
     points: [
-      'AI voice follow-ups for overdue receivables',
-      'Inbound bot captures dealer re-orders automatically',
-      'Daily executive summaries and dead stock alerts',
+      'Automated WhatsApp and SMS follow-ups for receivables',
+      'Dealer portal captures repeat purchase orders automatically',
+      'Daily executive summaries and real-time stock alerts',
     ],
   },
   {

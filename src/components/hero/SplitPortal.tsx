@@ -52,8 +52,8 @@ interface SplitPortalProps {
                 onClick={onOpenContact}
                 className="pointer-events-auto inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/95 hover:bg-white text-neutral-900 text-xs font-bold border border-amber-300 shadow-xl hover:shadow-2xl hover:scale-105 active:translate-y-px transition-all cursor-pointer"
               >
-                <span className="w-2 h-2 rounded-full bg-[#D4A800] animate-pulse" />
                 <span>Apply Now</span>
+                <ArrowRight size={13} className="text-[#D4A800]" />
               </button>
             )}
         </motion.div>

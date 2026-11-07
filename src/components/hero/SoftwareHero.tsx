@@ -49,7 +49,7 @@ export default function SoftwareHero({ onOpenContact }: SoftwareHeroProps) {
 
                     {/* Modules list — clean inline */}
                       <div className="mt-5 text-xs sm:text-sm text-neutral-600 font-semibold leading-loose">
-                        CRM · ERP · Sales &amp; Purchase · Orders · Inventory · POS · Accounting &amp; GST · HRMS · AI Copilot · AI Calls
+                        CRM · ERP · Sales &amp; Purchase · Orders · Inventory · POS · Accounting &amp; GST · HRMS · Order Processing · Analytics
                       </div>
 
                       {/* CTAs */}

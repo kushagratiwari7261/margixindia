@@ -139,7 +139,7 @@ if (view === 'software') {
           className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-full bg-[#0f172a] hover:bg-[#1e293b] text-white border border-[#D4A800]/50 shadow-2xl text-xs sm:text-sm font-bold tracking-wide transition-all cursor-pointer group"
           aria-label="Apply Now"
         >
-          <span className="w-2 h-2 rounded-full bg-[#F9CA24] animate-pulse" />
+          
           <span>Apply Now</span>
           <ArrowRight size={14} className="text-[#F9CA24] group-hover:translate-x-1 transition-transform" />
         </motion.button>
@@ -214,7 +214,7 @@ return (
         className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-full bg-[#0f172a] hover:bg-[#1e293b] text-white border border-[#D4A800]/50 shadow-2xl text-xs sm:text-sm font-bold tracking-wide transition-all cursor-pointer group"
         aria-label="Apply Now"
       >
-        <span className="w-2 h-2 rounded-full bg-[#F9CA24] animate-pulse" />
+        
         <span>Apply Now</span>
         <ArrowRight size={14} className="text-[#F9CA24] group-hover:translate-x-1 transition-transform" />
       </motion.button>

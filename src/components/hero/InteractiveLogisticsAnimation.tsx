@@ -80,7 +80,7 @@ export default function InteractiveLogisticsAnimation() {
                 {/* Top Telemetry Bar */}
                 <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-neutral-100">
                   <div className="flex items-center gap-2.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#B08D00] animate-pulse" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#B08D00]" />
                     <span className="text-xs sm:text-sm font-bold text-neutral-800">
                       {stage === 'loading' && 'Stage 1: Scanning Billable Consignment Items...'}
                       {stage === 'inefficient' && 'Stage 2: Partial Load Detected (Space Wasted)'}
