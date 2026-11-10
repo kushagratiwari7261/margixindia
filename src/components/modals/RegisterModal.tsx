@@ -281,7 +281,7 @@ export default function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                     Application Logged
                   </h3>
                   <p className="text-sm text-neutral-600 max-w-sm mb-6">
-                    We will be in touch with you directly, or contact us at <a href="mailto:contact@margixindia.com" className="text-amber-700 font-bold underline">contact@margixindia.com</a>.
+                    We will be in touch with you directly, or contact us at <a href="mailto:support@margixindia.com" className="text-amber-700 font-bold underline">support@margixindia.com</a>.
                   </p>
 
                   <button

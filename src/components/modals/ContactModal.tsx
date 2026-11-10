@@ -228,11 +228,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         whileHover={isValid ? { scale: 1.015, y: -1 } : {}}
                         whileTap={isValid ? { scale: 0.985, y: 1 } : {}}
                         transition={{ duration: 0.15 }}
-                        className={`w-full py-3.5 px-6 rounded-2xl text-sm font-bold flex items-center justify-center gap-2.5 transition-all cursor-pointer group shadow-sm ${
-                          isValid
+                        className={`w-full py-3.5 px-6 rounded-2xl text-sm font-bold flex items-center justify-center gap-2.5 transition-all cursor-pointer group shadow-sm ${isValid
                             ? 'bg-neutral-950 hover:bg-black text-white hover:shadow-xl hover:shadow-neutral-950/20 active:translate-y-px border border-neutral-900'
                             : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
-                        }`}
+                          }`}
                       >
                         <span>Submit Application</span>
                         <ArrowRight size={16} className="text-[#F9CA24] group-hover:translate-x-1.5 transition-transform duration-200" />
@@ -345,7 +344,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     Application Recorded
                   </h3>
                   <p className="text-xs text-neutral-600 max-w-sm mb-6 leading-relaxed">
-                    Your details were saved. You can also contact our team directly at <a href="mailto:contact@margixindia.com" className="text-[#B08D00] font-semibold underline">contact@margixindia.com</a>.
+                    Your details were saved. You can also contact our team directly at <a href="mailto:support@margixindia.com" className="text-[#B08D00] font-semibold underline">support@margixindia.com</a>.
                   </p>
 
                   <button
